@@ -1,0 +1,35 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.2.2'
+    compile 'org.grooscript:grooscript:0.4.4'
+    runtime 'commons-cli:commons-cli:1.2'
+    runtime 'org.apache.ivy:ivy:2.2.0'
+    compile 'cglib:cglib-nodep:2.2'
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+        exclude module: 'groovy-all'
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.grooscript', name: 'grooscript-gradle-plugin', version: '0.2'
+    }
+}
+
+apply plugin: 'grooscript'
+
+grooscript {
+    source = ['src/main/groovy/colors']
+    destination = 'js'
+    classPath = ['src/main/groovy']
+    initialText = '//Grooscript converted file'
+}
