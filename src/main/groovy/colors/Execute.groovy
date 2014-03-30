@@ -16,7 +16,7 @@ Colors.improve(MyClass)
 def myClass = new MyClass()
 
 alone {
-    myClass.sayInRed('Hello in Red!')
+    myClass.sayInRed('Hello world!')
 }
 
 alone {
