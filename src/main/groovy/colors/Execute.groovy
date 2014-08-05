@@ -1,24 +1,21 @@
 package colors
 
-class MyClass {
-    def sayInRed(msg) {
-        red(msg)
-    }
-}
+import static nodejs.NodeJs.nodejs
 
-def alone = { cl ->
-    println ''
-    cl()
-    println ''
-}
+nodejs {
+    red 'Message in red with colors'
+    rainbow 'Grooscript in action 2014!\n'
 
-Colors.improve(MyClass)
-def myClass = new MyClass()
+    module 'request'
+    module 'async'
 
-alone {
-    myClass.sayInRed('Hello world!')
-}
-
-alone {
-    myClass.rainbow("Welcome Greach 2014!")
+    parallel([
+        { countBodyChars 'http://grails.org' },
+        { countBodyChars 'http://bintray.com' },
+        { countBodyChars 'http://google.com' },
+        { countBodyChars 'http://twitter.com' },
+        { countBodyChars 'http://groovy.codehaus.org' },
+        { countBodyChars 'http://gradle.org' },
+        { bold '\nReading url\'s...\n' },
+    ])
 }
