@@ -2,10 +2,6 @@ package colors
 
 import org.grooscript.asts.GsNative
 
-/**
- * User: jorgefrancoleza
- * Date: 07/03/14
- */
 trait JsColors {
     @GsNative
     def red(String msg) {/*

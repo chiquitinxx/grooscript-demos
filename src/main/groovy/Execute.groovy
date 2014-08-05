@@ -1,15 +1,13 @@
-package colors
-
 import static nodejs.NodeJs.nodejs
 
 nodejs {
-    red 'Message in red with colors'
-    rainbow 'Grooscript in action 2014!\n'
+    rainbow '\nGrooscript in action 2014!' //<1>
+    red     '--------------------------\n'
 
-    module 'request'
+    module 'request' //<2>
     module 'async'
 
-    parallel([
+    parallel([ //<3>
         { countBodyChars 'http://grails.org' },
         { countBodyChars 'http://bintray.com' },
         { countBodyChars 'http://google.com' },
