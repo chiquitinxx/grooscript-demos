@@ -1,10 +1,5 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:0.5" //<1>
-    }
+plugins {
+    id "org.grooscript.conversion" version "0.6" //<1>
 }
 
 apply plugin: 'idea'
@@ -17,7 +12,7 @@ repositories {
 
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.3.6'
-    compile ('org.grooscript:grooscript:0.5.2') {
+    compile ('org.grooscript:grooscript:0.6') {
         exclude module: 'groovy'
     }
 }
@@ -31,5 +26,5 @@ grooscript {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+    gradleVersion = '2.1'
 }
