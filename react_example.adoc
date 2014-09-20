@@ -1,0 +1,87 @@
+= Reacting with http://grooscript.org[grooscript]
+:author: Jorge Franco
+:email: grooscript@gmail.com
+:source-highlighter: pygments
+:icons: font
+
+http://facebook.github.io/react/index.html[React] is a javascript library for building UI's. It's a different
+approach, usually people use templates. With react, you work with javascript objects. I think is a good idea, but,
+it's better to do similar implementation using grooscript.
+
+
+I wrote this link:nodejs_example.html[guide] where I created a DSL on top of Node.js using traits. Now I'm going to use
+AST's, groovy beans, and a little meta-programming. Use the groovy features in the browser or node, is the main reason
+to use grooscript. So let's create reactive objects as react.js does, in a TO-DO sample application:
+
+image::todo.png[Result]
+
+=== In javascript, from react.js page
+
+[source,javascript]
+--
+var TodoList = React.createClass({displayName: 'TodoList',
+  render: function() {
+    var createItem = function(itemText) {
+      return React.DOM.li(null, itemText);
+    };
+    return React.DOM.ul(null, this.props.items.map(createItem));
+  }
+});
+var TodoApp = React.createClass({displayName: 'TodoApp',
+  getInitialState: function() {
+    return {items: [], text: ''};
+  },
+  onChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var nextItems = this.state.items.concat([this.state.text]);
+    var nextText = '';
+    this.setState({items: nextItems, text: nextText});
+  },
+  render: function() {
+    return (
+      React.DOM.div(null,
+        React.DOM.h3(null, "TODO"),
+        TodoList({items: this.state.items}),
+        React.DOM.form({onSubmit: this.handleSubmit},
+          React.DOM.input({onChange: this.onChange, value: this.state.text}),
+          React.DOM.button(null, 'Add #' + (this.state.items.length + 1))
+        )
+      )
+    );
+  }
+});
+React.renderComponent(TodoApp(null), mountNode);
+--
+
+=== In groovy, my implementation
+
+[source,groovy]
+--
+include::src/main/groovy/react/TodoApp.groovy[]
+
+renderComponent(new TodoApp(), '#todoApp') //<8>
+--
+<1> AST that do all react job.
+<2> List of all TODO's added.
+<3> New TODO that is being typed in the text input.
+<4> Initialization of the component.
+<5> React on any change in the input text.
+<6> On 'Add TODO' click.
+<7> Html dsl that renders the component.
+<8> Render the component in the DOM selector.
+
+
+
+
+
+=== Conclusion
+
+Implement things in http://beta.groovy-lang.org/[groovy] is a pleasure. Now with grooscript, you can create nice pieces
+of code on groovy that will run smooth in your browser.
+
+Please, if you have comments, suggestions, problems,... don't hesitate to contact me at grooscript@gmail.com, or open
+an issue or feature in http://github.com/chiquitinxx/grooscript/issues?state=open[Github]. More guides come in the
+future, also can find more documentation in http://grooscript.org[grooscript] site.
