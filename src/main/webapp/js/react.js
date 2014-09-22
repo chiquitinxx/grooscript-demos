@@ -14,7 +14,7 @@ function TodoAppFinal() {
   gSobject['actualTodoChange'] = function(actualTodoValue) {
     return gs.mc(gSobject,"setActualTodo",[actualTodoValue]);
   }
-  gSobject['addTodoClick'] = function(it) {
+  gSobject['addTodosSubmit'] = function(it) {
     if (gs.bool(gSobject.actualTodo)) {
       gs.mc(gSobject.todos,'leftShift', gs.list([gSobject.actualTodo]));
       return gs.mc(gSobject,"setActualTodo",[""]);
@@ -22,7 +22,7 @@ function TodoAppFinal() {
   }
   gSobject['render'] = function(it) {
     return gs.mc(gSobject.gQuery,"html",[gSobject.selector, gs.execStatic(HtmlBuilder,'build', this,[function(it) {
-      return gs.mc(this,"div",[function(it) {
+      return gs.mc(this,"form",[gs.map().add("id","addTodos"), function(it) {
         gs.mc(this,"h3",["TODO"], gSobject);
         return gs.mc(this,"ul",[function(it) {
           gs.mc(gSobject.todos,"each",[function(it) {
@@ -30,7 +30,9 @@ function TodoAppFinal() {
           }]);
           return gs.mc(this,"li",[function(it) {
             gs.mc(this,"input",[gs.map().add("type","text").add("id","actualTodo").add("value",gSobject.actualTodo)], gSobject);
-            return gs.mc(this,"input",[gs.map().add("type","button").add("id","addTodo").add("value","Add #" + (gs.mc(gSobject.todos,"size",[])) + "")], gSobject);
+            return gs.mc(this,"button",[function(it) {
+              return gs.mc(this,"yield",["Add #" + (gs.plus(gs.mc(gSobject.todos,"size",[]), 1)) + ""], gSobject);
+            }], gSobject);
           }], gSobject);
         }], gSobject);
       }], gSobject);
@@ -50,18 +52,14 @@ function TodoAppFinal() {
   }
   gSobject['bindEvents'] = function(it) {
     gs.mc(gSobject,"bindInput",["#actualTodo", gSobject["actualTodoChange"]]);
-    return gs.mc(gSobject.gQuery,"bindEvent",["addTodo", "click", gSobject["addTodoClick"]]);
+    return gs.mc(gSobject.gQuery,"bindEvent",["addTodos", "submit", gs.mc(gSobject["addTodosSubmit"],'leftShift', gs.list([function(it) {
+      return gs.mc(it,"preventDefault",[]);
+    }]))]);
   }
   gSobject['setActualTodo'] = function(value) {
-    gs.println(gs.plus("New actualTodo: ", value));
     gSobject.actualTodo = value;
     gs.mc(gSobject,"start",[]);
     return gs.mc(gSobject,"focus",["#actualTodo"]);
-  }
-  gSobject['setTodos'] = function(value) {
-    gs.println(gs.plus("New todo: ", value));
-    gSobject.todos = value;
-    return gs.mc(gSobject,"start",[]);
   }
   gSobject['start'] = function(it) {
     gs.mc(gSobject,"render",[]);
@@ -71,8 +69,6 @@ function TodoAppFinal() {
   
   return gSobject;
 };
-
-
 var renderComponent = function(component, selector) {
   gs.mc(component,"init",[]);
   gs.sp(component,"selector",selector);

@@ -10,8 +10,9 @@ it's better to do similar implementation using grooscript.
 
 
 I wrote this link:nodejs_example.html[guide] where I created a DSL on top of Node.js using traits. Now I'm going to use
-AST's, groovy beans, and a little meta-programming. Use the groovy features in the browser or node, is the main reason
-to use grooscript. So let's create reactive objects as react.js does, in a TO-DO sample application:
+AST's and groovy beans. Use the groovy features in the browser, is the main reason to use grooscript.
+
+So let's create reactive objects as react.js does, in a TO-DO sample application:
 
 image::todo.png[Result]
 
@@ -61,8 +62,6 @@ React.renderComponent(TodoApp(null), mountNode);
 [source,groovy]
 --
 include::src/main/groovy/react/TodoApp.groovy[]
-
-renderComponent(new TodoApp(), '#todoApp') //<8>
 --
 <1> AST that do all react job.
 <2> List of all TODO's added.
@@ -71,16 +70,43 @@ renderComponent(new TodoApp(), '#todoApp') //<8>
 <5> React on any change in the input text.
 <6> On 'Add TODO' click.
 <7> Html dsl that renders the component.
-<8> Render the component in the DOM selector.
 
+For the execution in javascript, I have used this groovy script:
 
+[source,groovy]
+--
+include::src/main/groovy/react.groovy[]
+--
+<1> Little helper class that comes with grooscript to do some jQuery stuff.
+<2> Call init function in the component.
+<3> Set the selector where draw the component.
+<4> Start the component.
+<5> Call the function to render the component on load the page.
 
+=== Advantages
 
+* You can create your own framework / libraries, that perfect fit with your application.
+* You write groovy code and test it with https://code.google.com/p/spock/[spock] or your favorite java / groovy testing framework.
+* You don't have to do functional tests, you can test all with unit tests and mock javascript / jquery.
+* You write the render code as a DSL, using groovy code, very powerful.
+* You can use traits, AST's, a little of inheritance, DSL's, a bit of meta-programming,... and a lot of groovy magic in your application.
+* You don't have to use any pre-processor as react.js does, just converting the code to javascript applies the AST's.
+
+=== Progress
+
+Example implementation not yet finished, during this months, this example, and other examples will be done.
+Version 1.0 of grooscript is coming soon, and the best release way, is use the library. If you have an idea
+to do with grooscript, go for it!
+
+I have to implement the AST, and add more features to jQueryImpl, but you can see the result link:react_example.html[here]
+
+You can take a look at the code on https://github.com/chiquitinxx/colors/tree/master/src/main/groovy/react[Github]
 
 === Conclusion
 
-Implement things in http://beta.groovy-lang.org/[groovy] is a pleasure. Now with grooscript, you can create nice pieces
-of code on groovy that will run smooth in your browser.
+Implement things in http://beta.groovy-lang.org/[groovy] is a pleasure, and now, with grooscript, you can create nice pieces
+of code that will run smooth in your browser. This is just a suggestion, loads of new ideas can be created
+in the browser or node.js using groovy and grooscript.
 
 Please, if you have comments, suggestions, problems,... don't hesitate to contact me at grooscript@gmail.com, or open
 an issue or feature in http://github.com/chiquitinxx/grooscript/issues?state=open[Github]. More guides come in the

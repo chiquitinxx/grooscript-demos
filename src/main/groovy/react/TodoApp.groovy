@@ -14,15 +14,15 @@ class TodoApp {
         setActualTodo(actualTodoValue)
     }
 
-    void addTodoClick() { //<6>
+    void addTodosSubmit() { //<6>
         if (actualTodo) {
-            setTodos(todos << actualTodo)
+            todos << actualTodo
             setActualTodo('')
         }
     }
 
     void render() { //<7>
-        div {
+        form(id: 'addTodos') {
             h3 'TODO'
             ul {
                 todos.each {
@@ -30,7 +30,9 @@ class TodoApp {
                 }
                 li {
                     input(type: 'text', id: 'actualTodo', value: actualTodo)
-                    input(type: 'button', id: 'addTodo', value: "Add #${todos.size()}")
+                    button {
+                        yield "Add #${todos.size() + 1}"
+                    }
                 }
             }
         }

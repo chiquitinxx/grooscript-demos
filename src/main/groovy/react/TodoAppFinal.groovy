@@ -9,19 +9,19 @@ class TodoAppFinal {
     List<String> todos
     String actualTodo
 
-    GQuery gQuery = new GQueryImpl()
-    String selector
+    GQuery gQuery = new GQueryImpl()  //<1>
+    String selector                   //<2>
 
-    void init() { //<4>
+    void init() {
         todos = []
         actualTodo = ''
     }
 
-    void actualTodoChange(actualTodoValue) { //<5>
+    void actualTodoChange(actualTodoValue) {
         setActualTodo(actualTodoValue)
     }
 
-    void addTodoClick() { //<6>
+    void addTodosSubmit() {
         if (actualTodo) {
             todos << actualTodo
             setActualTodo('')
@@ -29,8 +29,8 @@ class TodoAppFinal {
     }
 
     void render() {
-        gQuery.html(selector, HtmlBuilder.build {
-            div {
+        gQuery.html(selector, HtmlBuilder.build {  //<3>
+            form(id: 'addTodos') {
                 h3 'TODO'
                 ul {
                     todos.each {
@@ -38,14 +38,16 @@ class TodoAppFinal {
                     }
                     li {
                         input(type: 'text', id: 'actualTodo', value: actualTodo)
-                        input(type: 'button', id: 'addTodo', value: "Add #${todos.size()}")
+                        button {
+                            yield "Add #${todos.size() + 1}"
+                        }
                     }
                 }
             }
         })
     }
 
-    @GsNative
+    @GsNative  //<4>
     def bindInput(selector, closure) {/*
         $(selector).bind('input', function() {
             var currentVal = $(this).val();
@@ -53,7 +55,7 @@ class TodoAppFinal {
         });
     */}
 
-    @GsNative
+    @GsNative   //<4>
     def focus(selector) {/*
         var input = $(selector);
         var originalValue = input.val();
@@ -61,25 +63,20 @@ class TodoAppFinal {
         input.blur().focus().val(originalValue);
     */}
 
+    //<5>
     void bindEvents() {
-        //gQuery.bindEvent('actualTodo', 'change', this.&actualTodoChange)
         bindInput('#actualTodo', this.&actualTodoChange)
-        gQuery.bindEvent('addTodo', 'click', this.&addTodoClick)
+        gQuery.bindEvent('addTodos', 'submit', this.&addTodosSubmit << { it.preventDefault() })
     }
 
+    //<6>
     void setActualTodo(value) {
-        println 'New actualTodo: '+value
         actualTodo = value
         start()
         focus('#actualTodo')
     }
 
-    void setTodos(value) {
-        println 'New todo: '+value
-        todos = value
-        start()
-    }
-
+    //<7>
     void start() {
         render()
         bindEvents()

@@ -26,8 +26,8 @@ grooscript {
     initialText = '//Grooscript converted file'
 }
 
-task react(type: org.grooscript.gradle.ConvertTask) {
-    source = ['src/main/groovy/react/react.groovy']
+task convertReact(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/react.groovy']
     destination = 'src/main/webapp/js'
     convertDependencies = true
     classPath = ['src/main/groovy']
