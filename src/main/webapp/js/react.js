@@ -38,28 +38,13 @@ function TodoAppFinal() {
       }], gSobject);
     }])]);
   }
-  gSobject.bindInput = function(selector, closure) {
-    $(selector).bind('input', function() {
-            var currentVal = $(this).val();
-            if (closure) { closure(currentVal); };
-        });
-  }
-  gSobject.focus = function(selector) {
-    var input = $(selector);
-        var originalValue = input.val();
-        input.val('');
-        input.blur().focus().val(originalValue);
-  }
   gSobject['bindEvents'] = function(it) {
-    gs.mc(gSobject,"bindInput",["#actualTodo", gSobject["actualTodoChange"]]);
-    return gs.mc(gSobject.gQuery,"bindEvent",["addTodos", "submit", gs.mc(gSobject["addTodosSubmit"],'leftShift', gs.list([function(it) {
-      return gs.mc(it,"preventDefault",[]);
-    }]))]);
+    return gs.mc(gSobject.gQuery,"attachMethodsToDomEvents",[this]);
   }
   gSobject['setActualTodo'] = function(value) {
     gSobject.actualTodo = value;
     gs.mc(gSobject,"start",[]);
-    return gs.mc(gSobject,"focus",["#actualTodo"]);
+    return gs.mc(gSobject.gQuery,"focusEnd",["#actualTodo"]);
   }
   gSobject['start'] = function(it) {
     gs.mc(gSobject,"render",[]);

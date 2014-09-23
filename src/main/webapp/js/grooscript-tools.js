@@ -101,7 +101,7 @@ function GQueryImpl() {
   var gSobject = gs.inherit(gs.baseClass,'GQueryImpl');
   gSobject.clazz = { name: 'org.grooscript.jquery.GQueryImpl', simpleName: 'GQueryImpl'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
-  gSobject.clazz.interfaces = [{ name: 'org.grooscript.jquery.GQuery', simpleName: 'GQuery'}, ];
+  gSobject.clazz.interfaces = [{ name: 'org.grooscript.jquery.GQuery', simpleName: 'GQuery'}];
   gSobject.bind = function(selector, target, nameProperty, closure) {
     if (closure === undefined) closure = null;
     var sourceDom = $(selector);
@@ -176,8 +176,8 @@ function GQueryImpl() {
   gSobject.existsGroup = function(name) {
     return $("input:radio[name='" + name + "']").length > 0
   }
-  gSobject.bindEvent = function(id, name, func) {
-    $('#'+id).on(name, func);
+  gSobject.onEvent = function(selector, nameEvent, func) {
+    $(selector).on(nameEvent, func);
   }
   gSobject.doRemoteCall = function(url, type, params, onSuccess, onFailure, objectResult) {
     if (objectResult === undefined) objectResult = null;
@@ -203,45 +203,81 @@ function GQueryImpl() {
   gSobject.html = function(selector, text) {
     $(selector).html(text);
   }
-  if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
-  
-  return gSobject;
-};
-
-//This script needs grooscript.js and jQuery to run
-function Binder() {
-  var gSobject = gs.inherit(gs.baseClass,'Binder');
-  gSobject.clazz = { name: 'org.grooscript.jquery.Binder', simpleName: 'Binder'};
-  gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
-  gSobject.gQuery = GQueryImpl();
-  gSobject['bindAllProperties'] = function(target, closure) {
-    if (closure === undefined) closure = null;
-    return gs.mc(gs.gp(target,"properties"),"each",[function(name, value) {
-      if (gs.mc(gSobject.gQuery,"existsId",[name])) {
-        gs.mc(gSobject.gQuery,"bind",["#" + (name) + "", target, name, closure]);
-      };
-      if (gs.mc(gSobject.gQuery,"existsName",[name])) {
-        gs.mc(gSobject.gQuery,"bind",["[name='" + (name) + "']", target, name, closure]);
-      };
-      if (gs.mc(gSobject.gQuery,"existsGroup",[name])) {
-        return gs.mc(gSobject.gQuery,"bind",["input:radio[name=" + (name) + "]", target, name, closure]);
-      };
-    }]);
-  }
-  gSobject['bindAllMethods'] = function(target) {
-    return gs.mc(gs.gp((target = gs.metaClass(target)),"methods"),"each",[function(method) {
+  gSobject['attachMethodsToDomEvents'] = function(obj) {
+    return gs.mc(gs.gp((obj = gs.metaClass(obj)),"methods"),"each",[function(method) {
       if (gs.mc(gs.gp(method,"name"),"endsWith",["Click"])) {
         var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 5)]);
-        if (gs.mc(gSobject.gQuery,"existsId",[shortName])) {
-          return gs.mc(gSobject.gQuery,"bindEvent",[shortName, "click", target["" + (gs.gp(method,"name")) + ""]]);
+        if (gs.mc(gSobject,"existsId",[shortName])) {
+          gs.mc(gSobject,"onEvent",[gs.plus("#", shortName), "click", obj["" + (gs.gp(method,"name")) + ""]]);
+        };
+      };
+      if (gs.mc(gs.gp(method,"name"),"endsWith",["Submit"])) {
+        var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 6)]);
+        if (gs.mc(gSobject,"existsId",[shortName])) {
+          gs.mc(gSobject,"onEvent",[gs.plus("#", shortName), "submit", gs.mc(obj["" + (gs.gp(method,"name")) + ""],'leftShift', gs.list([function(it) {
+            return gs.mc(it,"preventDefault",[]);
+          }]))]);
+        };
+      };
+      if (gs.mc(gs.gp(method,"name"),"endsWith",["Change"])) {
+        var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 6)]);
+        if (gs.mc(gSobject,"existsId",[shortName])) {
+          return gs.mc(gSobject,"onChange",[shortName, obj["" + (gs.gp(method,"name")) + ""]]);
         };
       };
     }]);
   }
-  gSobject['call'] = function(target, closure) {
-    if (closure === undefined) closure = null;
-    gs.mc(gSobject,"bindAllProperties",[target, closure]);
-    return gs.mc(gSobject,"bindAllMethods",[target]);
+  gSobject.onChange = function(id, closure) {
+    var sourceDom = $('#' + id);
+
+        if (sourceDom.is(":text")) {
+            sourceDom.bind('input', function() {
+                closure($(this).val());
+            });
+        } else if (sourceDom.is('textarea')) {
+            sourceDom.bind('input propertychange', function() {
+                closure($(this).val());
+            });
+        } else if (sourceDom.is(":checkbox")) {
+            sourceDom.change(function() {
+                closure($(this).is(':checked'));
+            });
+        } else if (sourceDom.is(":radio")) {
+            sourceDom.change(function() {
+                closure($(this).val());
+            });
+        } else if (sourceDom.is("select")) {
+            sourceDom.bind('change', function() {
+                closure($(this).val());
+            });
+        } else {
+            console.log('Not supporting onChange for id ' + id);
+        }
+  }
+  gSobject.focusEnd = function(selector) {
+    var sourceDom = $(selector);
+        if (sourceDom) {
+            if (sourceDom.is(":text") || sourceDom.is('textarea')) {
+                var originalValue = sourceDom.val();
+                sourceDom.val('');
+                sourceDom.blur().focus().val(originalValue);
+            } else {
+                sourceDom.focus();
+            }
+        }
+  }
+  gSobject['bindAllProperties'] = function(target) {
+    return gs.mc(gs.gp(target,"properties"),"each",[function(name, value) {
+      if (gs.mc(gSobject,"existsId",[name])) {
+        gs.mc(gSobject,"bind",["#" + (name) + "", target, name]);
+      };
+      if (gs.mc(gSobject,"existsName",[name])) {
+        gs.mc(gSobject,"bind",["[name='" + (name) + "']", target, name]);
+      };
+      if (gs.mc(gSobject,"existsGroup",[name])) {
+        return gs.mc(gSobject,"bind",["input:radio[name=" + (name) + "]", target, name]);
+      };
+    }]);
   }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   

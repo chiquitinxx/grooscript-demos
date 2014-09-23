@@ -98,7 +98,7 @@ Example implementation not yet finished, during this months, this example, and o
 Version 1.0 of grooscript is coming soon, and the best release way, is use the library. If you have an idea
 to do with grooscript, go for it!
 
-I have to implement the AST, and add more features to jQueryImpl, but you can see the result link:react_example.html[here]
+I have to implement the AST, and add more features to jQueryImpl, but you can see the result link:react.html[here]
 
 You can take a look at the code on https://github.com/chiquitinxx/colors/tree/master/src/main/groovy/react[Github]
 

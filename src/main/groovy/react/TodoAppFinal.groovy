@@ -1,6 +1,5 @@
 package react
 
-import org.grooscript.asts.GsNative
 import org.grooscript.builder.HtmlBuilder
 import org.grooscript.jquery.GQuery
 import org.grooscript.jquery.GQueryImpl
@@ -47,33 +46,16 @@ class TodoAppFinal {
         })
     }
 
-    @GsNative  //<4>
-    def bindInput(selector, closure) {/*
-        $(selector).bind('input', function() {
-            var currentVal = $(this).val();
-            if (closure) { closure(currentVal); };
-        });
-    */}
-
-    @GsNative   //<4>
-    def focus(selector) {/*
-        var input = $(selector);
-        var originalValue = input.val();
-        input.val('');
-        input.blur().focus().val(originalValue);
-    */}
-
     //<5>
     void bindEvents() {
-        bindInput('#actualTodo', this.&actualTodoChange)
-        gQuery.bindEvent('addTodos', 'submit', this.&addTodosSubmit << { it.preventDefault() })
+        gQuery.attachMethodsToDomEvents(this)
     }
 
     //<6>
     void setActualTodo(value) {
         actualTodo = value
         start()
-        focus('#actualTodo')
+        gQuery.focusEnd('#actualTodo')
     }
 
     //<7>
