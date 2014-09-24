@@ -5,8 +5,6 @@ function TodoAppFinal() {
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.todos = null;
   gSobject.actualTodo = null;
-  gSobject.gQuery = GQueryImpl();
-  gSobject.selector = null;
   gSobject['init'] = function(it) {
     gSobject.todos = gs.list([]);
     return gSobject.actualTodo = "";
@@ -21,7 +19,7 @@ function TodoAppFinal() {
     };
   }
   gSobject['render'] = function(it) {
-    return gs.mc(gSobject.gQuery,"html",[gSobject.selector, gs.execStatic(HtmlBuilder,'build', this,[function(it) {
+    return gs.mc(gs.fs('gQuery', this),"html",[gs.fs('selector', this), gs.execStatic(HtmlBuilder,'build', this,[function(it) {
       return gs.mc(this,"form",[gs.map().add("id","addTodos"), function(it) {
         gs.mc(this,"h3",["TODO"], gSobject);
         return gs.mc(this,"ul",[function(it) {
@@ -41,11 +39,11 @@ function TodoAppFinal() {
   gSobject['setActualTodo'] = function(value) {
     gSobject.actualTodo = value;
     gs.mc(gSobject,"draw",[]);
-    return gs.mc(gSobject.gQuery,"focusEnd",["#actualTodo"]);
+    return gs.mc(gs.fs('gQuery', this),"focusEnd",["#actualTodo"]);
   }
   gSobject['draw'] = function(it) {
     gs.mc(gSobject,"render",[]);
-    return gs.mc(gSobject.gQuery,"attachMethodsToDomEvents",[this]);
+    return gs.mc(gs.fs('gQuery', this),"attachMethodsToDomEvents",[this]);
   }
   gSobject['start'] = function(it) {
     return gs.mc(gSobject,"draw",[]);

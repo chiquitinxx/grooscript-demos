@@ -1,5 +1,7 @@
 package react
 
+import org.grooscript.GrooScript
+
 /**
  * User: jorgefrancoleza
  * Date: 20/09/14
@@ -42,5 +44,11 @@ class TodoAppTest extends GroovyTestCase {
             assert comp.gQuery instanceof GQueryImpl
             assert comp.selector == null
 '''
+    }
+
+    void testConvertAst() {
+        GrooScript.setConversionProperty('classPath', 'src/main/groovy')
+        GrooScript.convert(['src/main/groovy/react/TodoAppFinal.groovy'], '.')
+        //println result
     }
 }

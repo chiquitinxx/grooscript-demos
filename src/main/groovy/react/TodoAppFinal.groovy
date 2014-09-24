@@ -9,8 +9,8 @@ class TodoAppFinal {
     List<String> todos
     String actualTodo
 
-    GQuery gQuery = new GQueryImpl()
-    String selector
+    //GQuery gQuery = new GQueryImpl()
+    //String selector
 
     void init() {
         todos = []
