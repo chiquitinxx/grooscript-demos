@@ -38,17 +38,17 @@ function TodoAppFinal() {
       }], gSobject);
     }])]);
   }
-  gSobject['bindEvents'] = function(it) {
-    return gs.mc(gSobject.gQuery,"attachMethodsToDomEvents",[this]);
-  }
   gSobject['setActualTodo'] = function(value) {
     gSobject.actualTodo = value;
-    gs.mc(gSobject,"start",[]);
+    gs.mc(gSobject,"draw",[]);
     return gs.mc(gSobject.gQuery,"focusEnd",["#actualTodo"]);
   }
-  gSobject['start'] = function(it) {
+  gSobject['draw'] = function(it) {
     gs.mc(gSobject,"render",[]);
-    return gs.mc(gSobject,"bindEvents",[]);
+    return gs.mc(gSobject.gQuery,"attachMethodsToDomEvents",[this]);
+  }
+  gSobject['start'] = function(it) {
+    return gs.mc(gSobject,"draw",[]);
   }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   

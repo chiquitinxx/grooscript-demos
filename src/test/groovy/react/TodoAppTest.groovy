@@ -29,4 +29,18 @@ class TodoAppTest extends GroovyTestCase {
         todoApp.actualTodoChange('final')
         assert todoApp.actualTodo == 'final'
     }
+
+    void testAstAddProperties() {
+        assertScript '''
+            import org.grooscript.jquery.GQueryImpl
+
+            @react.Component
+            class Comp {}
+
+            def comp = new Comp()
+            assert comp.gQuery
+            assert comp.gQuery instanceof GQueryImpl
+            assert comp.selector == null
+'''
+    }
 }

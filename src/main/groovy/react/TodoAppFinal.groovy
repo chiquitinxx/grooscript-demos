@@ -4,12 +4,13 @@ import org.grooscript.builder.HtmlBuilder
 import org.grooscript.jquery.GQuery
 import org.grooscript.jquery.GQueryImpl
 
+@Component
 class TodoAppFinal {
     List<String> todos
     String actualTodo
 
-    GQuery gQuery = new GQueryImpl()  //<1>
-    String selector                   //<2>
+    GQuery gQuery = new GQueryImpl()
+    String selector
 
     void init() {
         todos = []
@@ -46,21 +47,18 @@ class TodoAppFinal {
         })
     }
 
-    //<5>
-    void bindEvents() {
-        gQuery.attachMethodsToDomEvents(this)
-    }
-
-    //<6>
     void setActualTodo(value) {
         actualTodo = value
-        start()
+        draw()
         gQuery.focusEnd('#actualTodo')
     }
 
-    //<7>
-    void start() {
+    void draw() {
         render()
-        bindEvents()
+        gQuery.attachMethodsToDomEvents(this)
+    }
+
+    void start() {
+        draw()
     }
 }
