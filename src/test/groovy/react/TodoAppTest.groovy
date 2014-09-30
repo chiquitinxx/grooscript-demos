@@ -47,8 +47,12 @@ class TodoAppTest extends GroovyTestCase {
     }
 
     void testConvertAst() {
-        GrooScript.setConversionProperty('classPath', 'src/main/groovy')
-        GrooScript.convert(['src/main/groovy/react/TodoAppFinal.groovy'], '.')
-        //println result
+        try {
+            GrooScript.setConversionProperty('classPath', 'src/main/groovy')
+            GrooScript.convert(['src/main/groovy/react/TodoAppFinal.groovy'], '.')
+            assert new File('TodoAppFinal.js').text.contains('gSobject.gQuery = GQueryImpl();')
+        } finally {
+            new File('TodoAppFinal.js')?.delete()
+        }
     }
 }

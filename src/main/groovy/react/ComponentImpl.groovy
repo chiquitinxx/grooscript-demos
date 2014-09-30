@@ -29,8 +29,5 @@ public class ComponentImpl implements ASTTransformation {
                 new ConstructorCallExpression(jQueryImpl, ArgumentListExpression.EMPTY_ARGUMENTS), null, null)
         classNode.addProperty('selector', Modifier.PUBLIC , ClassHelper.STRING_TYPE, null, null, null)
 
-
-        //println 'Ast ended!: ' + classNode
-
     }
 }
