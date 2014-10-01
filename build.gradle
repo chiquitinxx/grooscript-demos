@@ -34,7 +34,10 @@ dependencies { //<3>
 }
 
 grooscript {
-    source = ['src/main/groovy/Execute.groovy'] //<4>
+    source = ['src/main/groovy/Execute.groovy',
+              'src/main/groovy/nodejs/NodeJs.groovy',
+              'src/main/groovy/colors/JsColors.groovy'
+    ] //<4>
     destination = 'js' //<5>
     classPath = ['src/main/groovy'] //<7>
     initialText = '//Grooscript converted file'

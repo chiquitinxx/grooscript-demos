@@ -1,8 +1,4 @@
 node_modules
-js/Colors.js
-js/Execute.js
-js/JsColors.js
-js/MyClass.js
 nodejs_example.html
 react_example.html
 grooscript-demos.*
