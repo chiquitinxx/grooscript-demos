@@ -3,9 +3,6 @@ js/Colors.js
 js/Execute.js
 js/JsColors.js
 js/MyClass.js
-colors.iml
-colors.ipr
-colors.iws
 nodejs_example.html
 react_example.html
-node.png
+grooscript-demos.*
