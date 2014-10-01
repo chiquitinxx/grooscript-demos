@@ -19,5 +19,12 @@ Grooscript demos
 ## Creating components like [react.js](http://facebook.github.io/react/) but in Groovy [guide](http://grooscript.org/react_example.html)
 
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/react)
+[In action](http://grooscript.org/demo/react.html)
 
 ![Todo App](todo.png)
+
+## Live conversions from [asciidoctor](http://asciidoctor.org/) to html
+
+[Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/asciidoctor/AdocLive.groovy)
+
+### [Try it!](http://grooscript.org/demo/asciidoctor.html)
