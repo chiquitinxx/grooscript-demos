@@ -41,7 +41,7 @@ grooscript {
 }
 
 task convertReact(type: org.grooscript.gradle.ConvertTask) {
-    source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoAppFinal.groovy']
+    source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }

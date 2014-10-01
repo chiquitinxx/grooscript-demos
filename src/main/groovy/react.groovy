@@ -1,13 +1,11 @@
 import org.grooscript.jquery.GQueryImpl //<1>
-import react.TodoAppFinal
+import react.TodoApp
 
 def renderComponent = { component, selector ->
-    component.init() //<2>
-    component.selector = selector //<3>
     def gQuery = new GQueryImpl()
     gQuery.onReady {
-        component.start() //<4>
+        component.start(selector) //<4>
     }
 }
 
-renderComponent(new TodoAppFinal(), '#todos') //<5>
+renderComponent(new TodoApp(), '#todos') //<5>
