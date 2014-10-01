@@ -57,7 +57,12 @@ task convertPaint(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/paint/Functions.groovy', 'src/main/groovy/paint/Draw.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
-    initialText = '//Grooscript converted file'
+}
+
+task convertAsciidoctor(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/asciidoctor/AdocLive.groovy', 'src/main/groovy/startLiveAdoc.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
 }
 
 task wrapper(type: Wrapper) {

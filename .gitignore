@@ -2,3 +2,4 @@ node_modules
 nodejs_example.html
 react_example.html
 grooscript-demos.*
+bower_components
