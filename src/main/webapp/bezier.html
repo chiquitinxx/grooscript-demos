@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Initial static web page</title>
+    <script type="text/javascript" src="js/grooscript.min.js"></script>
+    <script type="text/javascript" src="js/Functions.js"></script>
+    <script type="text/javascript" src="js/Draw.js"></script>
+    <style type="text/css">
+        canvas { border: 1px solid black; }
+    </style>
+</head>
+<body onload="drawInfinite()">
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <script type="text/javascript">
+        var draw = Draw('canvas');
+
+        function drawInfinite() {
+            draw.random();
+            window.setTimeout(function() {
+                drawInfinite();
+            }, 0);
+        }
+    </script>
+</body>

@@ -31,6 +31,10 @@ dependencies { //<3>
     compile ('org.grooscript:grooscript:0.6.1-SNAPSHOT') {
         exclude module: 'groovy'
     }
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+        exclude module: 'groovy-all'
+    }
+    testCompile 'cglib:cglib-nodep:2.2.2'
 }
 
 grooscript {
@@ -47,6 +51,13 @@ task convertReact(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
+}
+
+task convertPaint(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/paint/Functions.groovy', 'src/main/groovy/paint/Draw.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+    initialText = '//Grooscript converted file'
 }
 
 task wrapper(type: Wrapper) {
