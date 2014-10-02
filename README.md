@@ -28,3 +28,9 @@ Grooscript demos
 [Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/asciidoctor/AdocLive.groovy)
 
 ### [Try it!](http://grooscript.org/demo/asciidoctor.html)
+
+## 2048 game, [play!](http://grooscript.org/demo/game.html)
+
+[Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/game)
+
+![Game](game.png)
