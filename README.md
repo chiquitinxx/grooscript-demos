@@ -34,3 +34,9 @@ Grooscript demos
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/game)
 
 ![Game](game.png)
+
+## Interactive graphic search, see in [action](http://grooscript.org/demo/sigma.html)
+
+[Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/countries)
+
+![Countries](countries.png)
