@@ -1,0 +1,9 @@
+[{"name":"Afghanistan","capital":"Kabul","altSpellings":["AF","AfÄ¡ÄnistÄn"],
+    "relevance":"0","region":"Asia","subregion":"Southern Asia",
+    "translations":{"de":"Afghanistan","es":"AfganistÃ¡n","fr":"Afghanistan",
+        "ja":"ã‚¢ãƒ•ã‚¬ãƒ‹ã‚¹ã‚¿ãƒ³","it":"Afghanistan"},
+    "population":26023100,"latlng":[33.0,65.0],"demonym":"Afghan","area":652230.0,
+    "gini":27.8,"timezones":["UTC+04:30"],"borders":["AFG"],
+    "nativeName":"Ø§ÙØºØ§Ù†Ø³ØªØ§Ù†","callingCodes":["93"],"topLevelDomain":[".af"],
+    "alpha2Code":"AF","alpha3Code":"AFG","currencies":["AFN"],"languages":["ps","uz","tk"]
+}]

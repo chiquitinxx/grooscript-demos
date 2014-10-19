@@ -1,0 +1,45 @@
+<html>
+<head>
+    <style type="text/css">
+        #container {
+            width: 1024px;
+            height: 500px;
+            margin: auto;
+        }
+        canvas { border: 1px solid black; }
+    </style>
+</head>
+<body>
+<p>Search countries: <input id="countrySearch" type="text"/> <span id="searchResult">Loading...</span></p>
+<p>Countries data from <a href="http://restcountries.eu/">REST countries API</a>.
+    Graphs powered by <a href="http://sigmajs.org/">sigma.js</a>. Use the mouse in the canvas to zoom or move.</p>
+<div id="container"></div>
+<p><a href="https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/countries">Source code</a></p>
+<p><a href="http://grooscript.org"><img src="img/gs.png" alt="grooscript"/></a> powered.</p>
+<script src="js/jquery.min.js"></script>
+<script src="js/sigma.min.js"></script>
+<script src="js/grooscript.min.js"></script>
+<script src="js/grooscript-tools.js"></script>
+<script src="js/CustomSigma.js"></script>
+<script src="js/CountriesPresenter.js"></script>
+<script>
+    var presenter;
+
+    $(document).ready(function() {
+        $.getJSON('countries.json', function(json) {
+            //console.log('->'+json.length);
+            var customSigma = CustomSigma('container');
+            presenter = CountriesPresenter({customSigma: customSigma});
+            presenter.gQuery = GQueryImpl();
+            presenter['loadCountries'] = function() {
+                return gs.toGroovy(json);
+            };
+            presenter.gQuery.onChange('countrySearch', presenter.onChangeCountry);
+            console.log('Loading countries...');
+            presenter.start();
+            console.log('All done.');
+        });
+    });
+</script>
+</body>
+</html>

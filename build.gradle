@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:0.6.1-SNAPSHOT"
+        classpath "org.grooscript:grooscript-gradle-plugin:0.7-SNAPSHOT"
     }
 }
 
@@ -28,7 +28,7 @@ repositories {
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:0.6.1-SNAPSHOT') {
+    compile ('org.grooscript:grooscript:0.6.2-SNAPSHOT') {
         exclude module: 'groovy'
     }
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
@@ -67,6 +67,12 @@ task convertAsciidoctor(type: org.grooscript.gradle.ConvertTask) {
 
 task convertGame2048(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/game']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
+task convertCountries(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/countries']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }

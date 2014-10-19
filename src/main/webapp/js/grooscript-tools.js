@@ -256,6 +256,7 @@ function GQueryImpl() {
   }
   gSobject.focusEnd = function(selector) {
     var sourceDom = $(selector);
+
         if (sourceDom) {
             if (sourceDom.is(":text") || sourceDom.is('textarea')) {
                 var originalValue = sourceDom.val();
