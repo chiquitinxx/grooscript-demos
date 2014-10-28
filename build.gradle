@@ -77,6 +77,12 @@ task convertCountries(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
+task convertChat(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/chat', 'src/main/groovy/startServer.groovy']
+    destination = 'js'
+    classPath = ['src/main/groovy']
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
 }
