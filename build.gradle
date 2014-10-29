@@ -77,11 +77,30 @@ task convertCountries(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
-task convertChat(type: org.grooscript.gradle.ConvertTask) {
-    source = ['src/main/groovy/chat', 'src/main/groovy/startServer.groovy']
+task convertChatServer(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/chat/NodeServer.groovy', 'src/main/groovy/startServer.groovy']
     destination = 'js'
     classPath = ['src/main/groovy']
 }
+
+task convertChatClient(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/chat/Client.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
+task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
+    templatesPath = 'src/main/webapp/templates'
+    templates = ['join.gtpl', 'left.gtpl', 'message.gtpl']
+    destinationPath = 'src/main/webapp/js'
+    //classPath
+}
+
+task chat << {
+    println 'Chat converted.'
+}
+
+chat.dependsOn chatTemplates, convertChatClient, convertChatServer
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'

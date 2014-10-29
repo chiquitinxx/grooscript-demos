@@ -1,16 +1,18 @@
 <html>
 <head>
-    <title>Initial static web page</title>
+    <title>Chat</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/grooscript.min.js"></script>
     <script type="text/javascript" src="js/grooscript-tools.js"></script>
+    <script type="text/javascript" src="js/Client.js"></script>
+    <script type="text/javascript" src="js/gstemplates.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font: 13px Helvetica, Arial; }
         #message { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-        #m { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        #chat { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
         #message button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
         #messages { list-style-type: none; margin: 0; padding: 0; }
         #messages li { padding: 5px 10px; }
@@ -18,39 +20,22 @@
     </style>
 </head>
 <body>
-    <p id="loginArea"><input id="l" autocomplete="off" /><button id="login">Login</button>
-    </p>
-    <ul id="messages"></ul>
-    <div id="message">
-        <input id="m" autocomplete="off" /><button id="sendMsg">Send</button>
+    <div id="loginArea">
+        <input id="login" autocomplete="off" /><button id="loginButton">Login</button>
+    </div>
+    <div id="chatArea">
+        <ul id="messages"></ul>
+        <div id="message">
+            <input id="chat" autocomplete="off" /><button id="sendMessage">Send</button>
+        </div>
     </div>
 
     <script>
-        var socket = io('http://localhost:3000');
-        var name;
-        socket.on('msg', function (data) {
-            $('#messages').append('<li><b>'+data.from+':</b>'+data.msg+'</li>');
-            //socket.emit('my other event', { my: 'data' });
-        });
-        socket.on('loginok', function (data) {
-            $('#messages').append('<li><b>'+data.name+' </b> joined the chat!</li>');
-            if (!name) {
-                name = data.name;
-            }
-        });
-        socket.on('off', function (data) {
-            $('#messages').append('<li><b>'+data.name+' </b> left the chat!</li>');
-        });
-        $('#sendMsg').click(function(){
-            var msg = $('#m').val();
-            socket.emit('msg', { msg: msg});
-            $('#messages').append('<li><b>'+name+':</b>'+msg+'</li>');
-            $('#m').val('');
-        });
-        $('#login').click(function(){
-            var login = $('#l').val();
-            socket.emit('login', { name: login});
-            $('#loginArea').hide();
+        $(document).ready(function () {
+            var client = Client();
+            var gQuery = GQueryImpl();
+            gQuery.bindAllProperties(client);
+            gQuery.attachMethodsToDomEvents(client);
         });
     </script>
 </body>
