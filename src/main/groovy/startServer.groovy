@@ -2,17 +2,14 @@
  * User: jorgefrancoleza
  * Date: 21/10/14
  */
+
+import org.grooscript.templates.Templates
+
 import static chat.NodeServer.server
 
 server {
     get('/') {
-        render 'Hello World!'
-    }
-    get('/spanish') {
-        render 'Hola Mundo!'
-    }
-    get('/salute/:name') {
-        render "Hello ${req.params.name}!"
+        render Templates.applyTemplate('join.gtpl', [name: 'Groovy'])
     }
     on('login') { data, socket ->
         if (data.name && !socket.login) {

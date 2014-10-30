@@ -1,13 +1,7 @@
 //Grooscript converted file
 gs.mc(NodeServer.server(function(it) {
   gs.mc(this,"get",["/", function(it) {
-    return gs.mc(this,"render",["Hello World!"]);
-  }]);
-  gs.mc(this,"get",["/spanish", function(it) {
-    return gs.mc(this,"render",["Hola Mundo!"]);
-  }]);
-  gs.mc(this,"get",["/salute/:name", function(it) {
-    return gs.mc(this,"render",["Hello " + (gs.gp(gs.gp(gs.fs('req', this),"params"),"name")) + "!"]);
+    return gs.mc(this,"render",[gs.execStatic(Templates,'applyTemplate', this,["join.gtpl", gs.map().add("name","Groovy")])]);
   }]);
   gs.mc(this,"on",["login", function(data, socket) {
     if ((gs.bool(gs.gp(data,"name"))) && (!gs.bool(gs.gp(socket,"login")))) {

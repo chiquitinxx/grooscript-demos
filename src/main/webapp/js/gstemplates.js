@@ -20,8 +20,9 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
   return gs.mc(HtmlBuilder,"build",[function(it) {
     return gs.mc(Templates,"li",[function(it) {
       if (gs.equals(gs.fs('name', this), "Groovy")) {
-        gs.mc(Templates,"img",[gs.map().add("src","img/groovy.png").add("height",20)]);
-        return gs.mc(Templates,"img",[gs.map().add("src","img/groovy.png").add("height",20)]);
+        return (3).times(function(it) {
+          return gs.mc(Templates,"img",[gs.map().add("src","img/groovy.png").add("height",20)]);
+        });
       } else {
         gs.mc(Templates,"b",["" + (gs.fs('name', this)) + " "]);
         return gs.mc(Templates,"yield",["joined the chat!"]);
@@ -47,7 +48,8 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
     return gs.mc(Templates,"li",[function(it) {
       gs.mc(Templates,"b",["" + (gs.fs('name', this)) + ": "]);
       if (gs.mc(gs.mc(gs.fs('name', this),"loLowerCase",[]),"contains",["pirate"])) {
-        return gs.mc(Templates,"yield",["" + (gs.fs('msg', this)) + " " + (pirateMessages [ gs.mc(gs.random(),"nextInt",[gs.mc(pirateMessages,"size",[])])]) + ""]);
+        var randomNumber = gs.mc(gs.random(),"nextInt",[gs.mc(pirateMessages,"size",[])]);
+        return gs.mc(Templates,"yield",["" + (gs.fs('msg', this)) + " " + (pirateMessages [ randomNumber]) + ""]);
       } else {
         return gs.mc(Templates,"yield",[gs.fs('msg', this)]);
       };

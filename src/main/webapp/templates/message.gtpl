@@ -3,7 +3,8 @@ def pirateMessages = ['YARRRRR!', 'YO-HO!', 'Ahoy Boys!', 'Surrrrrender the boot
 li {
     b "${name}: "
     if (name.loLowerCase().contains('pirate')) {
-        yield "${msg} ${pirateMessages[new Random().nextInt(pirateMessages.size())]}"
+        def randomNumber = new Random().nextInt(pirateMessages.size())
+        yield "${msg} ${pirateMessages[randomNumber]}"
     } else {
         yield msg
     }
