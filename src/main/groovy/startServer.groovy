@@ -1,15 +1,10 @@
-/**
- * User: jorgefrancoleza
- * Date: 21/10/14
- */
-
 import org.grooscript.templates.Templates
 
 import static chat.NodeServer.server
 
 server {
     get('/') {
-        render Templates.applyTemplate('join.gtpl', [name: 'Groovy'])
+        render Templates.applyTemplate('index.gtpl')
     }
     on('login') { data, socket ->
         if (data.name && !socket.login) {
@@ -22,9 +17,6 @@ server {
         if (data.msg && socket.login) {
             socket.broadcast.emit 'msg', [from: socket.login, msg: data.msg]
         }
-    }
-    on('login') { data ->
-        println 'Try login: '+data.name
     }
     on('disconnect') { socket ->
         if (socket.login) {

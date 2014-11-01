@@ -55,4 +55,41 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
       };
     }]);
   }]);
+}).add("index.gtpl",function(model) {
+  if (model === undefined) model = gs.map();
+  return gs.mc(HtmlBuilder,"build",[function(it) {
+    gs.mc(Templates,"yieldUnescaped",["<!DOCTYPE html>"]);
+    return gs.mc(Templates,"html",[function(it) {
+      gs.mc(Templates,"head",[function(it) {
+        gs.mc(Templates,"title",["Chat"]);
+        gs.mc(gs.list(["js/jquery.min.js" , "js/grooscript.min.js" , "js/grooscript-tools.js" , "js/Client.js" , "js/gstemplates.js" , "https://cdn.socket.io/socket.io-1.2.0.js"]),"each",[function(it) {
+          return gs.mc(Templates,"script",[gs.map().add("type","text/javascript").add("src",it), function(it) {
+          }]);
+        }]);
+        return gs.mc(Templates,"link",[gs.map().add("rel","stylesheet").add("type","text/css").add("href","css/chat.css")]);
+      }]);
+      return gs.mc(Templates,"body",[function(it) {
+        gs.mc(Templates,"div",[gs.map().add("id","loginArea"), function(it) {
+          return gs.mc(Templates,"input",[gs.map().add("id","login").add("autocomplete","off"), function(it) {
+            return gs.mc(Templates,"button",[gs.map().add("id","loginButton"), function(it) {
+              return gs.mc(Templates,"yield",["Login"]);
+            }]);
+          }]);
+        }]);
+        gs.mc(Templates,"div",[gs.map().add("id","chatArea"), function(it) {
+          gs.mc(Templates,"ul",[gs.map().add("id","messages")]);
+          return gs.mc(Templates,"div",[gs.map().add("id","message"), function(it) {
+            return gs.mc(Templates,"input",[gs.map().add("id","chat").add("autocomplete","off"), function(it) {
+              return gs.mc(Templates,"button",[gs.map().add("id","sendMessage"), function(it) {
+                return gs.mc(Templates,"yield",["Send"]);
+              }]);
+            }]);
+          }]);
+        }]);
+        return gs.mc(Templates,"script",[function(it) {
+          return gs.mc(Templates,"yield",["Client.init();"]);
+        }]);
+      }]);
+    }]);
+  }]);
 });

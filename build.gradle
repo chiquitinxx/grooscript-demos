@@ -91,7 +91,7 @@ task convertChatClient(type: org.grooscript.gradle.ConvertTask) {
 
 task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
     templatesPath = 'src/main/webapp/templates'
-    templates = ['join.gtpl', 'left.gtpl', 'message.gtpl']
+    templates = ['join.gtpl', 'left.gtpl', 'message.gtpl', 'index.gtpl']
     destinationPath = 'src/main/webapp/js'
     //classPath
 }

@@ -15,13 +15,14 @@ class NodeServer {
     def allClients = []
 
     NodeServer() {
-        println 'Setup server'
         setupServer()
     }
 
     @GsNative
     private setupServer() {/*
-        this.expressApp = require('express')();
+        var express = require('express');
+        this.expressApp = express();
+        this.expressApp.use(express.static(__dirname + '/src/main/webapp'));
         this.nodeJsServer = require('http').Server(this.expressApp);
         this.socketIo = require('socket.io')(this.nodeJsServer);
 
@@ -74,7 +75,7 @@ class NodeServer {
         closure.delegate = nodeServer
         closure()
         [start: { port ->
-            println 'Start on port: ' + port
+            println "Server start on port: $port"
             nodeServer.listenSockets()
             nodeServer.nodeJsServer.listen(port)
         }]

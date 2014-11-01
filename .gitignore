@@ -1,5 +1,6 @@
 node_modules
 nodejs_example.html
 react_example.html
+chat_example.html
 grooscript-demos.*
 bower_components

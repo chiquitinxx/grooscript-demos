@@ -1,44 +1,44 @@
 package chat
 
 import org.grooscript.asts.GsNative
+import org.grooscript.jquery.GQuery
+import org.grooscript.jquery.GQueryImpl
 import org.grooscript.templates.Templates
 
-/**
- * User: jorgefrancoleza
- * Date: 29/10/14
- */
 class Client {
 
     def login
     def chat
     def socket
+    GQuery gQuery
 
-    Client() {
-        init()
+    Client(jQueryImpl) {
+        this.gQuery = jQueryImpl
+        socketInit()
         socket.on 'msg', { data ->
-            append '#messages', Templates.applyTemplate('message.gtpl', [name: data.from, msg: data.msg])
+            gQuery('#messages').append Templates.applyTemplate('message.gtpl', [name: data.from, msg: data.msg])
         }
         socket.on 'loginok', { data ->
             if (data.name == login) {
                 chatMode(login)
             }
-            append '#messages', Templates.applyTemplate('join.gtpl', [name: data.name])
+            gQuery('#messages').append Templates.applyTemplate('join.gtpl', [name: data.name])
         }
         socket.on 'off', { data ->
-            append '#messages', Templates.applyTemplate('left.gtpl', [name: data.name])
+            gQuery('#messages').append Templates.applyTemplate('left.gtpl', [name: data.name])
         }
+        gQuery('#chatArea').hide()
+        gQuery('#loginArea').show()
     }
 
     @GsNative
-    void init() {/*
+    void socketInit() {/*
         this.socket = io('http://localhost:3000');
-        $('#chatArea').hide();
-        $('#loginArea').show();
     */}
 
     def sendMessageClick() {
         socket.emit 'msg', [msg: chat]
-        append '#messages', Templates.applyTemplate('message.gtpl', [name: login, msg: chat])
+        gQuery('#messages').append Templates.applyTemplate('message.gtpl', [name: login, msg: chat])
         setChat ''
     }
 
@@ -46,15 +46,18 @@ class Client {
         socket.emit 'login', [name: login]
     }
 
-    @GsNative
-    void append(selector, html) {/*
-        $(selector).append(html);
-    */}
+    void chatMode(login) {
+        gQuery('#chatArea').show()
+        gQuery('#loginArea').hide()
+        gQuery('title').text "Chat - $login"
+    }
 
-    @GsNative
-    void chatMode(login) {/*
-        $('#chatArea').show();
-        $('#loginArea').hide();
-        $('title').text(login);
-    */}
+    static init() {
+        def gQuery = new GQueryImpl()
+        gQuery.onReady {
+            def client = new Client(gQuery)
+            gQuery.bindAllProperties(client)
+            gQuery.attachMethodsToDomEvents(client)
+        }
+    }
 }

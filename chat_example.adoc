@@ -1,0 +1,102 @@
+= Chat made in groovy, running in Node.js
+:author: Jorge Franco
+:email: grooscript@gmail.com
+:source-highlighter: pygments
+:icons: font
+
+With http://grooscript.org[grooscript], you can create groovy code and run it in your browser or
+http://nodejs.org/[Node.js]. Let's see an example using a groovy dsl in the server, groovy templates,
+http://socket.io/[socket.io], and more groovy code in the client. Is just a chat application, clients login
+the chat, write messages and see messages from other logged users.
+
+image::chat.png[Chat]
+
+=== Server side
+
+The server is a node.js app, starting a web server with http://expressjs.com/[express], and websocket server
+with socket.io. To run all this you need Node.js installed, grooscript, express and socket.io
+https://www.npmjs.org/[npm modules]. The server just serves +index.html+ page and process chat commands comming
+from websockets. I have created a groovy dsl to start the server:
+
+[source,groovy]
+--
+include::src/main/groovy/startServer.groovy[]
+--
+
+=== Groovy templates
+
+I have created a little helper, in the grooscript gradle plugin, to process groovy templates. Is a incubating
+feature, with some limitations, that dunno if people is interested in use it. At the moment, only available
+in snapshot version.
+
+[source,groovy]
+--
+task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
+    templatesPath = 'src/main/webapp/templates'
+    templates = ['join.gtpl', 'left.gtpl', 'message.gtpl', 'index.gtpl']
+    destinationPath = 'src/main/webapp/js'
+}
+--
+
+The templates are converted to javascript and added to a file called +gstemplates.js+, that file has a class
+that you can use in javascript, you can use in javascript / groovy:
+
+[source,groovy]
+--
+Templates.applyTemplate('join.gtpl', [name: data.name])
+--
+
+Index template is used in the server, the rest are used in the browser, to use with the messages coming
+from websocket. Is very easy create logic in a groovy template, for example to show messages
+from a pirate user:
+
+[source,groovy]
+--
+include::src/main/webapp/templates/message.gtpl[]
+--
+
+=== Client side
+
+The index page is a groovy template coming from the server:
+
+[source,groovy]
+--
+include::src/main/webapp/templates/index.gtpl[]
+--
+
+Jquery, grooscript, grooscript-tools, templates, socket.io are the libraries needed. The logic of the
+application running in the browser is in +Client.groovy+. Just with +Client.init()+ starts all in the browser:
+
+[source,groovy]
+--
+include::src/main/groovy/chat/Client.groovy[]
+--
+
+Lot of things are done in the client, send the login, switching views between chat mode and login mode,
+receive login from other users, show messages from other users, disconnected users, init sockets client and
+listeners,... As you can see, all logic is in one groovy file.
+
+=== Run all
+
+To run this, created +startChat.js+ file, only have to do +node startChat.js+ to run the server:
+
+[source,javascript]
+--
+include::startChat.js[]
+--
+
+Now open your browser in +http://localhost:3000/+ and the login div appears.
+
+All the code is on https://github.com/chiquitinxx/grooscript-demos[github]. I use some snapshots from grooscript
+and grooscript gradle plugin, with grooscript 0.6.2 and gradle plugin 0.7 all will be updated and will work
+if you clone it.
+
+=== Conclusion
+
+Is very easy create logic in groovy and see the results in the browser. Was very funny explore socket.io
+and groovy templates with grooscript. Groovy is better language than javascript, and if you know groovy you
+can create better code running in js world.
+
+Please, if you have comments, suggestions, problems,... don't hesitate to contact me at grooscript@gmail.com, or open
+an issue or feature in http://github.com/chiquitinxx/grooscript/issues?state=open[Github]. More guides come in the
+future, also can find more documentation in http://grooscript.org[grooscript] site.

@@ -13,7 +13,9 @@ function NodeServer() {
   gSobject.allSocketsOn = gs.list([]);
   gSobject.allClients = gs.list([]);
   gSobject.setupServer = function() {
-    this.expressApp = require('express')();
+    var express = require('express');
+        this.expressApp = express();
+        this.expressApp.use(express.static(__dirname + '/src/main/webapp'));
         this.nodeJsServer = require('http').Server(this.expressApp);
         this.socketIo = require('socket.io')(this.nodeJsServer);
   }
@@ -58,7 +60,6 @@ function NodeServer() {
   }
   gSobject.server = function(x0) { return NodeServer.server(x0); }
   gSobject['NodeServer0'] = function(it) {
-    gs.println("Setup server");
     gs.mc(gSobject,"setupServer",[]);
     return this;
   }
@@ -72,7 +73,7 @@ NodeServer.server = function(closure) {
   gs.sp(closure,"delegate",nodeServer);
   (closure.delegate!=undefined?gs.applyDelegate(closure,closure.delegate,[]):gs.execCall(closure, this, []));
   return gs.map().add("start",function(port) {
-    gs.println(gs.plus("Start on port: ", port));
+    gs.println("Server start on port: " + (port) + "");
     gs.mc(nodeServer,"listenSockets",[]);
     return gs.mc(gs.gp(nodeServer,"nodeJsServer"),"listen",[port]);
   });
