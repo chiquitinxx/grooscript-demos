@@ -15,9 +15,15 @@ function NodeServer() {
   gSobject.setupServer = function() {
     var express = require('express');
         this.expressApp = express();
+        this.expressApp.set('port', (process.env.PORT || 5000));
         this.expressApp.use(express.static(__dirname + '/src/main/webapp'));
         this.nodeJsServer = require('http').Server(this.expressApp);
         this.socketIo = require('socket.io')(this.nodeJsServer);
+  }
+  gSobject.startNodeJsServer = function() {
+    var port = this.expressApp.get('port');
+        console.log("Chat is running at port:" + port);
+        this.nodeJsServer.listen(port);
   }
   gSobject.listenSockets = function() {
     console.log('Initializing socket.io...');
@@ -72,9 +78,8 @@ NodeServer.server = function(closure) {
   var nodeServer = NodeServer();
   gs.sp(closure,"delegate",nodeServer);
   (closure.delegate!=undefined?gs.applyDelegate(closure,closure.delegate,[]):gs.execCall(closure, this, []));
-  return gs.map().add("start",function(port) {
-    gs.println("Server start on port: " + (port) + "");
+  return gs.map().add("start",function(it) {
     gs.mc(nodeServer,"listenSockets",[]);
-    return gs.mc(gs.gp(nodeServer,"nodeJsServer"),"listen",[port]);
+    return gs.mc(nodeServer,"startNodeJsServer",[]);
   });
 }

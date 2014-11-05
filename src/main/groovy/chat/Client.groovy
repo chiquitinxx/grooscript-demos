@@ -33,7 +33,7 @@ class Client {
 
     @GsNative
     void socketInit() {/*
-        this.socket = io('http://localhost:3000');
+        this.socket = io(window.location.hostname);
     */}
 
     def sendMessageClick() {

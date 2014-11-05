@@ -23,4 +23,4 @@ server {
             socket.broadcast.emit 'off', [name: socket.login]
         }
     }
-}.start(3000)
+}.start()

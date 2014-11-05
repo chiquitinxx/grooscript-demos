@@ -20,4 +20,4 @@ gs.mc(NodeServer.server(function(it) {
       return gs.mc(gs.gp(socket,"broadcast"),"emit",["off", gs.map().add("name",gs.gp(socket,"login"))]);
     };
   }]);
-}),"start",[3000]);
+}),"start",[]);

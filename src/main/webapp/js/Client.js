@@ -8,7 +8,7 @@ function Client() {
   gSobject.socket = null;
   gSobject.gQuery = null;
   gSobject.socketInit = function() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(window.location.hostname);
   }
   gSobject['sendMessageClick'] = function(it) {
     gs.mc(gSobject.socket,"emit",["msg", gs.map().add("msg",gSobject.chat)]);

@@ -22,10 +22,17 @@ class NodeServer {
     private setupServer() {/*
         var express = require('express');
         this.expressApp = express();
+        this.expressApp.set('port', (process.env.PORT || 5000));
         this.expressApp.use(express.static(__dirname + '/src/main/webapp'));
         this.nodeJsServer = require('http').Server(this.expressApp);
         this.socketIo = require('socket.io')(this.nodeJsServer);
+    */}
 
+    @GsNative
+    private startNodeJsServer() {/*
+        var port = this.expressApp.get('port');
+        console.log("Chat is running at port:" + port);
+        this.nodeJsServer.listen(port);
     */}
 
     @GsNative
@@ -74,10 +81,9 @@ class NodeServer {
         NodeServer nodeServer = new NodeServer()
         closure.delegate = nodeServer
         closure()
-        [start: { port ->
-            println "Server start on port: $port"
+        [start: { ->
             nodeServer.listenSockets()
-            nodeServer.nodeJsServer.listen(port)
+            nodeServer.startNodeJsServer()
         }]
     }
 }
