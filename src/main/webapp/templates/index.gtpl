@@ -17,6 +17,11 @@ html {
                 }
                 yield ' chat demo'
             }
+            h4 {
+                a(href: 'https://github.com/chiquitinxx/grooscript-demos') {
+                    yield 'GitHub source demos'
+                }
+            }
         }
         section {
             div (id: 'loginArea') {

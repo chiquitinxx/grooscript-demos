@@ -70,11 +70,16 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
       }]);
       return gs.mc(Templates,"body",[function(it) {
         gs.mc(Templates,"header",[function(it) {
-          return gs.mc(Templates,"h2",[function(it) {
+          gs.mc(Templates,"h2",[function(it) {
             gs.mc(Templates,"a",[gs.map().add("href","http://grooscript.org"), function(it) {
               return gs.mc(Templates,"yield",["grooscript"]);
             }]);
             return gs.mc(Templates,"yield",[" chat demo"]);
+          }]);
+          return gs.mc(Templates,"h4",[function(it) {
+            return gs.mc(Templates,"a",[gs.map().add("href","https://github.com/chiquitinxx/grooscript-demos"), function(it) {
+              return gs.mc(Templates,"yield",["GitHub source demos"]);
+            }]);
           }]);
         }]);
         gs.mc(Templates,"section",[function(it) {

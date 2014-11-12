@@ -12,6 +12,9 @@ header {
     padding: 50px;
     text-align: center;
 }
+header h2 {
+    padding-bottom: 20px;
+}
 section {
     text-align: center;
 }

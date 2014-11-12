@@ -40,3 +40,10 @@ Grooscript demos
 [Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/countries)
 
 ![Countries](countries.png)
+
+## Basic chat running in Node.js, deployed in Heroku [join](https://cryptic-headland-6974.herokuapp.com/) [+info](http://grooscript.org/chat_example.html)
+
+[Server](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/startServer.groovy)
+[Client](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/chat/Client.groovy)
+
+![Chat](newchat.png)
