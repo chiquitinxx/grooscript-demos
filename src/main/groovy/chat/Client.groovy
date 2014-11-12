@@ -29,6 +29,7 @@ class Client {
         }
         gQuery('#chatArea').hide()
         gQuery('#loginArea').show()
+        bindEvents()
     }
 
     @GsNative
@@ -49,6 +50,7 @@ class Client {
     void chatMode(login) {
         gQuery('#chatArea').show()
         gQuery('#loginArea').hide()
+        gQuery('#chat').focus()
         gQuery('title').text "Chat - $login"
     }
 
@@ -58,6 +60,19 @@ class Client {
             def client = new Client(gQuery)
             gQuery.bindAllProperties(client)
             gQuery.attachMethodsToDomEvents(client)
+        }
+    }
+
+    private bindEvents() {
+        gQuery('#chat').keypress { event ->
+            if (event.which == 13) {
+                sendMessageClick()
+            }
+        }
+        gQuery('#login').keypress { event ->
+            if (event.which == 13) {
+                loginButtonClick()
+            }
         }
     }
 }

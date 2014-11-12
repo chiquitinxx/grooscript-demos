@@ -21,9 +21,22 @@ function Client() {
   gSobject['chatMode'] = function(login) {
     gs.mc(gs.mc(gSobject,"gQuery",["#chatArea"]),"show",[]);
     gs.mc(gs.mc(gSobject,"gQuery",["#loginArea"]),"hide",[]);
+    gs.mc(gs.mc(gSobject,"gQuery",["#chat"]),"focus",[]);
     return gs.mc(gs.mc(gSobject,"gQuery",["title"]),"text",["Chat - " + (login) + ""]);
   }
   gSobject.init = function() { return Client.init(); }
+  gSobject['bindEvents'] = function(it) {
+    gs.mc(gs.mc(gSobject,"gQuery",["#chat"]),"keypress",[function(event) {
+      if (gs.equals(gs.gp(event,"which"), 13)) {
+        return gs.mc(gSobject,"sendMessageClick",[]);
+      };
+    }]);
+    return gs.mc(gs.mc(gSobject,"gQuery",["#login"]),"keypress",[function(event) {
+      if (gs.equals(gs.gp(event,"which"), 13)) {
+        return gs.mc(gSobject,"loginButtonClick",[]);
+      };
+    }]);
+  }
   gSobject['Client1'] = function(jQueryImpl) {
     gs.sp(this,"gQuery",jQueryImpl);
     gs.mc(gSobject,"socketInit",[]);
@@ -41,6 +54,7 @@ function Client() {
     }]);
     gs.mc(gs.mc(gSobject,"gQuery",["#chatArea"]),"hide",[]);
     gs.mc(gs.mc(gSobject,"gQuery",["#loginArea"]),"show",[]);
+    gs.mc(gSobject,"bindEvents",[]);
     return this;
   }
   if (arguments.length==1) {gSobject.Client1(arguments[0]); }

@@ -105,7 +105,13 @@ public class ComponentImpl implements ASTTransformation {
             renderMethod.setCode(new BlockStatement([
                 new ExpressionStatement(
                     new MethodCallExpression(
-                        new VariableExpression('gQuery', new ClassNode(GQuery)),
+                        new MethodCallExpression(
+                            new VariableExpression('gQuery', new ClassNode(GQuery)),
+                            'call',
+                            new ArgumentListExpression([
+                                    new VariableExpression('selector', ClassHelper.STRING_TYPE)
+                            ])
+                        ),
                         'html',
                         new ArgumentListExpression([
                             new VariableExpression('selector', ClassHelper.STRING_TYPE),

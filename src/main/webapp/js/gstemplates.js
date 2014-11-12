@@ -69,19 +69,29 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
         return gs.mc(Templates,"link",[gs.map().add("rel","stylesheet").add("type","text/css").add("href","css/chat.css")]);
       }]);
       return gs.mc(Templates,"body",[function(it) {
-        gs.mc(Templates,"div",[gs.map().add("id","loginArea"), function(it) {
-          return gs.mc(Templates,"input",[gs.map().add("id","login").add("autocomplete","off"), function(it) {
-            return gs.mc(Templates,"button",[gs.map().add("id","loginButton"), function(it) {
-              return gs.mc(Templates,"yield",["Login"]);
+        gs.mc(Templates,"header",[function(it) {
+          return gs.mc(Templates,"h2",[function(it) {
+            gs.mc(Templates,"a",[gs.map().add("href","http://grooscript.org"), function(it) {
+              return gs.mc(Templates,"yield",["grooscript"]);
             }]);
+            return gs.mc(Templates,"yield",[" chat demo"]);
           }]);
         }]);
-        gs.mc(Templates,"div",[gs.map().add("id","chatArea"), function(it) {
-          gs.mc(Templates,"ul",[gs.map().add("id","messages")]);
-          return gs.mc(Templates,"div",[gs.map().add("id","message"), function(it) {
-            return gs.mc(Templates,"input",[gs.map().add("id","chat").add("autocomplete","off"), function(it) {
-              return gs.mc(Templates,"button",[gs.map().add("id","sendMessage"), function(it) {
-                return gs.mc(Templates,"yield",["Send"]);
+        gs.mc(Templates,"section",[function(it) {
+          gs.mc(Templates,"div",[gs.map().add("id","loginArea"), function(it) {
+            return gs.mc(Templates,"input",[gs.map().add("id","login").add("autocomplete","off").add("autofocus","true"), function(it) {
+              return gs.mc(Templates,"button",[gs.map().add("id","loginButton"), function(it) {
+                return gs.mc(Templates,"yield",["Login"]);
+              }]);
+            }]);
+          }]);
+          return gs.mc(Templates,"div",[gs.map().add("id","chatArea"), function(it) {
+            gs.mc(Templates,"ul",[gs.map().add("id","messages")]);
+            return gs.mc(Templates,"div",[gs.map().add("id","message"), function(it) {
+              return gs.mc(Templates,"input",[gs.map().add("id","chat").add("autocomplete","off"), function(it) {
+                return gs.mc(Templates,"button",[gs.map().add("id","sendMessage"), function(it) {
+                  return gs.mc(Templates,"yield",["Send"]);
+                }]);
               }]);
             }]);
           }]);

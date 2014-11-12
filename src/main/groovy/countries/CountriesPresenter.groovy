@@ -70,6 +70,6 @@ class CountriesPresenter {
     }
 
     private updateNumberCountries(number, message = '') {
-        gQuery.html('#searchResult', "${number} found. ${message}")
+        gQuery('#searchResult').html("${number} found. ${message}")
     }
 }

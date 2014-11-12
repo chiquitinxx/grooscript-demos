@@ -59,7 +59,7 @@ function CountriesPresenter() {
   }
   gSobject['updateNumberCountries'] = function(number, message) {
     if (message === undefined) message = "";
-    return gs.mc(gSobject.gQuery,"html",["#searchResult", "" + (number) + " found. " + (message) + ""]);
+    return gs.mc(gs.mc(gSobject,"gQuery",["#searchResult"]),"html",["" + (number) + " found. " + (message) + ""]);
   }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   

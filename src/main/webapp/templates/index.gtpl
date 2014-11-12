@@ -10,19 +10,29 @@ html {
     }
 
     body {
-        div (id: 'loginArea') {
-            input (id: 'login', autocomplete: 'off') {
-                button (id: 'loginButton') {
-                    yield 'Login'
+        header {
+            h2 {
+                a(href: 'http://grooscript.org') {
+                    yield 'grooscript'
                 }
+                yield ' chat demo'
             }
         }
-        div (id: 'chatArea') {
-            ul id: 'messages'
-            div (id: 'message') {
-                input (id: 'chat', autocomplete: 'off') {
-                    button (id: 'sendMessage') {
-                        yield 'Send'
+        section {
+            div (id: 'loginArea') {
+                input (id: 'login', autocomplete: 'off', autofocus: "true") {
+                    button (id: 'loginButton') {
+                        yield 'Login'
+                    }
+                }
+            }
+            div (id: 'chatArea') {
+                ul id: 'messages'
+                div (id: 'message') {
+                    input (id: 'chat', autocomplete: 'off') {
+                        button (id: 'sendMessage') {
+                            yield 'Send'
+                        }
                     }
                 }
             }
