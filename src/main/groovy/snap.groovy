@@ -22,8 +22,7 @@ snapSvg('svg') {
     def hours = rect x: middle.x - 2, y: 65, width: 4, height: 85, fill: "#000"
     def minutes = rect x: middle.x - 1, y: 40, width: 2, height: 110, fill: "#000"
     def seconds = rect x: middle.x - 0.5, y: 13, width: 1, height: 150, fill: "red"
-    //Refresh each second
-    repeat(1000) {
+    def rotateClockHands = {
         def nowValues = new Date().format('HH:mm:ss').split(':').collect { it.toInteger() }
         def hour = nowValues[0] % 12
         def minute = nowValues[1]
@@ -31,4 +30,8 @@ snapSvg('svg') {
         minutes.rotate(minute * 6, middle.x, middle.y)
         seconds.rotate(nowValues[2] * 6, middle.x, middle.y)
     }
+    rotateClockHands()
+
+    //Refresh each second
+    repeat(1000, rotateClockHands)
 }

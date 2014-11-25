@@ -47,3 +47,7 @@ Grooscript demos
 [Client](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/chat/Client.groovy)
 
 ![Chat](newchat.png)
+
+## Svg clock, see in [action](http://grooscript.org/demo/snapsvg.html)
+
+![Chat](snapsvg.png)

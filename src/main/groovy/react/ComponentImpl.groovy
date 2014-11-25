@@ -13,6 +13,7 @@ import org.codehaus.groovy.ast.expr.ClassExpression
 import org.codehaus.groovy.ast.expr.ClosureExpression
 import org.codehaus.groovy.ast.expr.ConstructorCallExpression
 import org.codehaus.groovy.ast.expr.MethodCallExpression
+import org.codehaus.groovy.ast.expr.PropertyExpression
 import org.codehaus.groovy.ast.expr.VariableExpression
 import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
@@ -21,7 +22,6 @@ import org.codehaus.groovy.control.SourceUnit
 import org.codehaus.groovy.transform.ASTTransformation
 import org.codehaus.groovy.transform.GroovyASTTransformation
 import org.grooscript.builder.HtmlBuilder
-import org.grooscript.jquery.GQuery
 import org.grooscript.jquery.GQueryImpl
 
 import java.lang.reflect.Modifier
@@ -48,11 +48,11 @@ public class ComponentImpl implements ASTTransformation {
             }
         }
 
-        manageRenderMethod(classNode)
-
         classNode.addProperty('gQuery', Modifier.PUBLIC , jQueryImpl,
                 new ConstructorCallExpression(jQueryImpl, ArgumentListExpression.EMPTY_ARGUMENTS), null, null)
         classNode.addProperty('selector', Modifier.PUBLIC , ClassHelper.STRING_TYPE, null, null, null)
+
+        manageRenderMethod(classNode)
     }
 
     private addSetMethod(ClassNode classNode, String nameProperty) {
@@ -106,7 +106,10 @@ public class ComponentImpl implements ASTTransformation {
                 new ExpressionStatement(
                     new MethodCallExpression(
                         new MethodCallExpression(
-                            new VariableExpression('gQuery', new ClassNode(GQuery)),
+                            new PropertyExpression(
+                                new VariableExpression('this', ClassHelper.OBJECT_TYPE),
+                                'gQuery'
+                            ),
                             'call',
                             new ArgumentListExpression([
                                     new VariableExpression('selector', ClassHelper.STRING_TYPE)
@@ -114,7 +117,6 @@ public class ComponentImpl implements ASTTransformation {
                         ),
                         'html',
                         new ArgumentListExpression([
-                            new VariableExpression('selector', ClassHelper.STRING_TYPE),
                             new MethodCallExpression(
                                 new ClassExpression(new ClassNode(HtmlBuilder)),
                                 'build' ,

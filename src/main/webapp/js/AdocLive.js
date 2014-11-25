@@ -20,7 +20,7 @@ function AdocLive() {
     return gs.mc(gSobject,"setAdocCode",[newText]);
   }
   gSobject['render'] = function(it) {
-    return gs.mc(gSobject.gQuery,"html",[gSobject.selector, gs.execStatic(HtmlBuilder,'build', this,[function(it) {
+    return gs.mc(gs.execCall(gs.gp(gs.thisOrObject(this,gSobject),"gQuery"), this, [gSobject.selector]),"html",[gs.execStatic(HtmlBuilder,'build', this,[function(it) {
       gs.mc(this,"h3",["Asciidoctor code:"], gSobject);
       gs.mc(this,"p",["* Stay alert, your cursor move to the end after each change"], gSobject);
       gs.mc(this,"textarea",[gs.map().add("id","adocCode").add("cols",100).add("rows",14), function(it) {

@@ -18,7 +18,7 @@ SnapSvg.snapSvg("svg", function(it) {
   var hours = gs.mc(this,"rect",[gs.map().add("x",gs.minus(gs.gp(middle,"x"), 2)).add("y",65).add("width",4).add("height",85).add("fill","#000")]);
   var minutes = gs.mc(this,"rect",[gs.map().add("x",gs.minus(gs.gp(middle,"x"), 1)).add("y",40).add("width",2).add("height",110).add("fill","#000")]);
   var seconds = gs.mc(this,"rect",[gs.map().add("x",gs.minus(gs.gp(middle,"x"), 0.5)).add("y",13).add("width",1).add("height",150).add("fill","red")]);
-  return gs.mc(this,"repeat",[1000, function(it) {
+  var rotateClockHands = function(it) {
     var nowValues = gs.mc(gs.mc(gs.mc(gs.date(),"format",["HH:mm:ss"]),"split",[":"]),"collect",[function(it) {
       return gs.mc(it,"toInteger",[]);
     }]);
@@ -27,5 +27,7 @@ SnapSvg.snapSvg("svg", function(it) {
     gs.mc(hours,"rotate",[gs.plus((gs.multiply(hour, 30)), (minute / 2)), gs.gp(middle,"x"), gs.gp(middle,"y")]);
     gs.mc(minutes,"rotate",[gs.multiply(minute, 6), gs.gp(middle,"x"), gs.gp(middle,"y")]);
     return gs.mc(seconds,"rotate",[gs.multiply((nowValues [ 2]), 6), gs.gp(middle,"x"), gs.gp(middle,"y")]);
-  }]);
+  };
+  (rotateClockHands.delegate!=undefined?gs.applyDelegate(rotateClockHands,rotateClockHands.delegate,[]):gs.execCall(rotateClockHands, this, []));
+  return gs.mc(this,"repeat",[1000, rotateClockHands]);
 });

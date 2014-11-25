@@ -21,7 +21,7 @@ function TodoApp() {
     };
   }
   gSobject['render'] = function(it) {
-    return gs.mc(gSobject.gQuery,"html",[gSobject.selector, gs.execStatic(HtmlBuilder,'build', this,[function(it) {
+    return gs.mc(gs.execCall(gs.gp(gs.thisOrObject(this,gSobject),"gQuery"), this, [gSobject.selector]),"html",[gs.execStatic(HtmlBuilder,'build', this,[function(it) {
       return gs.mc(this,"form",[gs.map().add("id","addTodos"), function(it) {
         gs.mc(this,"h3",["TODO"], gSobject);
         return gs.mc(this,"ul",[function(it) {
