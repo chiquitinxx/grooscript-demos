@@ -1,4 +1,3 @@
-//This script needs grooscript.js to run
 function HtmlBuilder() {
   var gSobject = gs.inherit(gs.baseClass,'HtmlBuilder');
   gSobject.clazz = { name: 'org.grooscript.builder.HtmlBuilder', simpleName: 'HtmlBuilder'};
@@ -96,7 +95,65 @@ HtmlBuilder.build = function(closure) {
   return gs.gp(builder,"htmCd");
 }
 
-//This script needs grooscript.js and jQuery to run
+function Observable() {
+  var gSobject = gs.inherit(gs.baseClass,'Observable');
+  gSobject.clazz = { name: 'org.grooscript.rx.Observable', simpleName: 'Observable'};
+  gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
+  gSobject.subscribers = gs.list([]);
+  gSobject.sourceList = null;
+  gSobject.chain = gs.list([]);
+  gSobject.listen = function() { return Observable.listen(); }
+  gSobject.from = function(x0) { return Observable.from(x0); }
+  gSobject['produce'] = function(event) {
+    return gs.mc(gSobject.subscribers,"each",[function(it) {
+      return gs.mc(gSobject,"processFunction",[event, it]);
+    }]);
+  }
+  gSobject['map'] = function(cl) {
+    gs.mc(gSobject.chain,'leftShift', gs.list([cl]));
+    return this;
+  }
+  gSobject['filter'] = function(cl) {
+    gs.mc(gSobject.chain,'leftShift', gs.list([function(it) {
+      if ((cl.delegate!=undefined?gs.applyDelegate(cl,cl.delegate,[it]):gs.execCall(cl, this, [it]))) {
+        return it;
+      } else {
+        throw "Exception";
+      };
+    }]));
+    return this;
+  }
+  gSobject['subscribe'] = function(cl) {
+    while (gs.bool(gSobject.chain)) {
+      cl = (gs.mc(cl,'leftShift', gs.list([gs.mc(gSobject.chain,"remove",[gs.minus(gs.mc(gSobject.chain,"size",[]), 1)])])));
+    };
+    gs.mc(gSobject.subscribers,'leftShift', gs.list([cl]));
+    if (gs.bool(gSobject.sourceList)) {
+      return gs.mc(gSobject.sourceList,"each",[function(it) {
+        return gs.mc(gSobject,"processFunction",[it, cl]);
+      }]);
+    };
+  }
+  gSobject['removeSubscribers'] = function(it) {
+    return gSobject.subscribers = gs.list([]);
+  }
+  gSobject['processFunction'] = function(data, cl) {
+    try {
+      (cl.delegate!=undefined?gs.applyDelegate(cl,cl.delegate,[data]):gs.execCall(cl, this, [data]));
+    } catch (e) {
+    };
+  }
+  if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
+  
+  return gSobject;
+};
+Observable.listen = function(it) {
+  return Observable();
+}
+Observable.from = function(list) {
+  return Observable(gs.map().add("sourceList",list));
+}
+
 function GQueryImpl() {
   var gSobject = gs.inherit(gs.baseClass,'GQueryImpl');
   gSobject.clazz = { name: 'org.grooscript.jquery.GQueryImpl', simpleName: 'GQueryImpl'};
@@ -276,6 +333,18 @@ function GQueryImpl() {
         return gs.mc(gSobject,"bind",["input:radio[name=" + (name) + "]", target, name]);
       };
     }]);
+  }
+  gSobject['bindAll'] = function(target) {
+    gs.mc(gSobject,"bindAllProperties",[target]);
+    return gs.mc(gSobject,"attachMethodsToDomEvents",[target]);
+  }
+  gSobject['observeEvent'] = function(selector, nameEvent, data) {
+    if (data === undefined) data = gs.map();
+    var observable = gs.execStatic(Observable,'listen', this,[]);
+    gs.mc((this.delegate!=undefined?gs.applyDelegate(this,this.delegate,[selector]):gs.execCall(this, this, [selector])),"on",[nameEvent, data, function(event) {
+      return gs.mc(observable,"produce",[event]);
+    }]);
+    return observable;
   }
   gSobject['call'] = function(selector) {
     return GQueryList(selector);
