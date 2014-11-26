@@ -109,6 +109,12 @@ task convertSnap(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
+task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/firebase/', 'src/main/groovy/firebaseAction.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
