@@ -1,8 +1,8 @@
-//plugins {
-//    id "org.grooscript.conversion" version "0.7" //<1>
-//}
+plugins {
+    id "org.grooscript.conversion" version "0.8" //<1>
+}
 
-
+/*
 buildscript {
     repositories {
         mavenLocal()
@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath "org.grooscript:grooscript-gradle-plugin:0.8-SNAPSHOT"
     }
-}
+}*/
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
@@ -29,7 +29,7 @@ repositories {
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:0.6.3-SNAPSHOT') {
+    compile ('org.grooscript:grooscript:0.6.3') {
         exclude module: 'groovy'
     }
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {

@@ -51,3 +51,12 @@ Grooscript demos
 ## Svg clock, see in [action](http://grooscript.org/demo/snapsvg.html)
 
 ![Chat](snapsvg.png)
+
+Build
+---
+
+In build.gradle, there are all the task to convert groovy files to javascript.
+
+You can open .html files in src/main/webapp to see the demos in the web.
+
+To run the demos in Node.js (colors.js and startChat.js), you need Node.js installed, and run +npm install+ (maybe as sudo) to install dependencies.
