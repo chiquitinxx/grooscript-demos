@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>Initial static web page</title>
+    <script type="text/javascript" src="js/grooscript.min.js"></script>
+    <script type="text/javascript" src="js/Stars.js"></script>
+    <style type="text/css">
+        body { margin: 0; overflow-x: hidden; overflow-y: hidden;}
+        img { width: 192px; height: 96px; visibility: hidden}
+    </style>
+</head>
+<body>
+    <canvas id="drawStars"></canvas>
+    <script type="text/javascript">
+        window.onload = function () {
+            Stars().start('drawStars');
+        }
+    </script>
+    <img id="groovyImage" src="img/groovy.png"/>
+    <img id="grailsImage" src="img/grails.png"/>
+</body>

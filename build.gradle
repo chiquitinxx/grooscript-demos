@@ -97,6 +97,12 @@ task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
     //classPath
 }
 
+task raphaelStars(type: org.grooscript.gradle.DaemonTask) {
+    source = ['src/main/groovy/raphael/Stars.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
 task chat << {
     println 'Chat converted.'
 }
