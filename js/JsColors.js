@@ -6,6 +6,8 @@ JsColors.gSaT = function(target) {
   target.grey = function(x0, x1) { return JsColors.grey(target, x0, x1); };
   target.rainbow = function(x0, x1) { return JsColors.rainbow(target, x0, x1); };
 };
+JsColors.$init$ = function($self) {
+}
 JsColors.red = function($self, msg) {
   console.log(msg.red);
 }

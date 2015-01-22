@@ -15,7 +15,7 @@ function CountriesPresenter() {
       return gs.gp(it,"alpha3Code");
     }]);
     gs.mc(gSobject.countries,"each",[function(country) {
-      return gs.mc(gSobject.customSigma,"addNode",[gs.map().add("id",gs.gp(country,"alpha3Code")).add("label",gs.gp(country,"name")).add("x",gs.gp(country,"latlng") [ 1]).add("y",gs.gp(country,"latlng") [ 0]).add("color",gSobject.purpleColor)]);
+      return gs.mc(gSobject.customSigma,"addNode",[gs.map().add("id",gs.gp(country,"alpha3Code")).add("label",gs.gp(country,"name")).add("x",gs.gp(country,"latlng")[1]).add("y",gs.gp(country,"latlng")[0]).add("color",gSobject.purpleColor)]);
     }]);
     gs.mc(gSobject.countries,"each",[function(country) {
       return gs.mc(gs.gp(country,"borders"),"each",[function(border) {

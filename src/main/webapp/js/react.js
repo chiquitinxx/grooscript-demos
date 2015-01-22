@@ -5,4 +5,4 @@ var renderComponent = function(component, selector) {
     return gs.mc(component,"start",[selector]);
   }]);
 };
-(renderComponent.delegate!=undefined?gs.applyDelegate(renderComponent,renderComponent.delegate,[TodoApp(), "#todos"]):gs.execCall(renderComponent, this, [TodoApp(), "#todos"]));
+gs.execCall(renderComponent, this, [TodoApp(), "#todos"]);

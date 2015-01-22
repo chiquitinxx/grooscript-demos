@@ -38,7 +38,7 @@ function SnapSvg() {
 };
 SnapSvg.snapSvg = function(selector, cl) {
   gs.sp(cl,"delegate",SnapSvg(selector));
-  return (cl.delegate!=undefined?gs.applyDelegate(cl,cl.delegate,[]):gs.execCall(cl, this, []));
+  return gs.execCall(cl, this, []);
 }
 
 function Element() {

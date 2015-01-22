@@ -4,7 +4,8 @@ function GrooscriptFirebase() {
   gSobject.clazz = { name: 'firebase.GrooscriptFirebase', simpleName: 'GrooscriptFirebase'};
   gSobject.clazz.superclass = { name: 'firebase.BaseFirebase', simpleName: 'BaseFirebase'};
   gSobject['onMessage'] = function(message) {
-    return gs.println("Message received: " + (message) + "");
+    gs.println("Message received: " + (message) + "");
+    return gs.mc(gs.mc(this,"$",["body"], gSobject),"append",["<h3>Message received: " + (message) + "</h3>"]);
   }
   gSobject['GrooscriptFirebase0'] = function(it) {
     gSobject.BaseFirebase1("https://vivid-fire-5565.firebaseio.com/");

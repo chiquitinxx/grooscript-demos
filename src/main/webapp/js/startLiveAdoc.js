@@ -5,4 +5,4 @@ var renderComponent = function(component, selector) {
     return gs.mc(component,"start",[selector]);
   }]);
 };
-(renderComponent.delegate!=undefined?gs.applyDelegate(renderComponent,renderComponent.delegate,[AdocLive(), "#asciidoctor"]):gs.execCall(renderComponent, this, [AdocLive(), "#asciidoctor"]));
+gs.execCall(renderComponent, this, [AdocLive(), "#asciidoctor"]);

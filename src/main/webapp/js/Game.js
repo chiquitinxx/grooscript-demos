@@ -29,7 +29,7 @@ function Game() {
     var empties = gs.mc(gSobject.cells,"findAll",[function(it) {
       return !gs.gp(it,"value");
     }]);
-    return gs.sp((empties [ gs.mc(gs.random(),"nextInt",[gs.mc(empties,"size",[])])]),"value",2);
+    return gs.sp((empties[gs.mc(gs.random(),"nextInt",[gs.mc(empties,"size",[])])]),"value",2);
   }
   gSobject['moveRight'] = function(it) {
     return gs.mc(gSobject.rows,"each",[function(it) {
@@ -53,9 +53,9 @@ function Game() {
   }
   gSobject['joinLine'] = function(line) {
     return gs.mc(gs.minus(gSobject.size, 1),"times",[function(number) {
-      if (gs.equals((line [ number]), (line [ (gs.plus(number, 1))]))) {
-        gs.sp((line [ number]),"value",(gs.multiply(gs.gp(line [ number],"value"), 2)));
-        return gs.mc(line [ (gs.plus(number, 1))],"reset",[]);
+      if (gs.equals((line[number]), (line[(gs.plus(number, 1))]))) {
+        gs.sp((line[number]),"value",(gs.multiply(gs.gp(line[number],"value"), 2)));
+        return gs.mc(line[(gs.plus(number, 1))],"reset",[]);
       };
     }]);
   }
@@ -65,7 +65,7 @@ function Game() {
     }]);
     return gs.mc(line,"eachWithIndex",[function(cell, i) {
       if (i < gs.mc(lineCompressed,"size",[])) {
-        return gs.sp(cell,"value",gs.gp(lineCompressed [ i],"value"));
+        return gs.sp(cell,"value",gs.gp(lineCompressed[i],"value"));
       } else {
         return gs.mc(cell,"reset",[]);
       };
@@ -82,11 +82,11 @@ function Game() {
       var row = gs.list([]);
       var column = gs.list([]);
       gs.mc(gSobject.size,"times",[function(it) {
-        gs.mc(row,'leftShift', gs.list([(gSobject.cells [ (gs.plus((gs.multiply(number, gSobject.size)), it))])]));
-        return gs.mc(column,'leftShift', gs.list([(gSobject.cells [ (gs.plus((gs.multiply(it, gSobject.size)), number))])]));
+        gs.mc(row,'leftShift', gs.list([(gSobject.cells[(gs.plus((gs.multiply(number, gSobject.size)), it))])]));
+        return gs.mc(column,'leftShift', gs.list([(gSobject.cells[(gs.plus((gs.multiply(it, gSobject.size)), number))])]));
       }]);
-      (gSobject.rows [ number]) = row;
-      return (gSobject.columns [ number]) = column;
+      (gSobject.rows[number]) = row;
+      return (gSobject.columns[number]) = column;
     }]);
     gs.mc(gSobject.initialNumbers,"times",[function(it) {
       return gs.mc(gSobject,"addRandomNumber",[]);

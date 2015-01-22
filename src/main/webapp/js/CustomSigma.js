@@ -35,7 +35,7 @@ function CustomSigma() {
         });
   }
   gSobject['moveCamaraTo'] = function(x, y, ratio) {
-    return gs.mc(gs.gp(gSobject.s,"cameras") [ 0],"goTo",[gs.map().add("x",x).add("y",y).add("ratio",ratio)]);
+    return gs.mc(gs.gp(gSobject.s,"cameras")[0],"goTo",[gs.map().add("x",x).add("y",y).add("ratio",ratio)]);
   }
   gSobject.moveCamaraToNode = function(node) {
     this.s.cameras[0].goTo({x:node['read_cam0:x'],y:node['read_cam0:y'],ratio:0.300})

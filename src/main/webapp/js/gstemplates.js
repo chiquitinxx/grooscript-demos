@@ -11,9 +11,9 @@ function Templates() {
 };
 Templates.applyTemplate = function(name, model) {
   if (model === undefined) model = gs.map();
-  var cl = Templates.templates [ name];
+  var cl = Templates.templates[name];
   gs.sp(cl,"delegate",model);
-  return (cl.delegate!=undefined?gs.applyDelegate(cl,cl.delegate,[model]):gs.execCall(cl, this, [model]));
+  return gs.execCall(cl, this, [model]);
 }
 Templates.templates = gs.map().add("join.gtpl",function(model) {
   if (model === undefined) model = gs.map();
@@ -49,7 +49,7 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
       gs.mc(Templates,"b",["" + (gs.fs('name', this)) + ": "]);
       if (gs.mc(gs.mc(gs.fs('name', this),"loLowerCase",[]),"contains",["pirate"])) {
         var randomNumber = gs.mc(gs.random(),"nextInt",[gs.mc(pirateMessages,"size",[])]);
-        return gs.mc(Templates,"yield",["" + (gs.fs('msg', this)) + " " + (pirateMessages [ randomNumber]) + ""]);
+        return gs.mc(Templates,"yield",["" + (gs.fs('msg', this)) + " " + (pirateMessages[randomNumber]) + ""]);
       } else {
         return gs.mc(Templates,"yield",[gs.fs('msg', this)]);
       };

@@ -7,5 +7,6 @@ class GrooscriptFirebase extends BaseFirebase {
 
     def onMessage(message) {
         println "Message received: $message"
+        $('body').append "<h3>Message received: ${message}</h3>"
     }
 }

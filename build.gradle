@@ -1,35 +1,34 @@
 plugins {
-    id "org.grooscript.conversion" version "0.8" //<1>
+    id "org.grooscript.conversion" version "0.10" //<1>
 }
 
-/*
-buildscript {
+/*buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
     }
     dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:0.8-SNAPSHOT"
+        classpath "org.grooscript:grooscript-gradle-plugin:0.10-SNAPSHOT"
     }
 }*/
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
-apply plugin: 'org.grooscript.conversion' //<2>
+//apply plugin: 'org.grooscript.conversion' //<2>
 
 ext {
-    groovyVersion = '2.3.7'
+    groovyVersion = '2.4.0'
 }
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
 }
 
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:0.6.3') {
+    compile ('org.grooscript:grooscript:1.0.0-rc-2') {
         exclude module: 'groovy'
     }
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
@@ -49,7 +48,8 @@ grooscript {
 }
 
 task convertReact(type: org.grooscript.gradle.ConvertTask) {
-    source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
+    source = [//'src/main/groovy/react.groovy',
+              'src/main/groovy/react/TodoApp.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }
@@ -93,11 +93,11 @@ task convertChatClient(type: org.grooscript.gradle.ConvertTask) {
 task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
     templatesPath = 'src/main/webapp/templates'
     templates = ['join.gtpl', 'left.gtpl', 'message.gtpl', 'index.gtpl']
-    destinationPath = 'src/main/webapp/js'
+    destinationFile = 'src/main/webapp/js/gstemplates.js'
     //classPath
 }
 
-task raphaelStars(type: org.grooscript.gradle.DaemonTask) {
+task groovyStars(type: org.grooscript.gradle.DaemonTask) {
     source = ['src/main/groovy/raphael/Stars.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
@@ -122,5 +122,5 @@ task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.2.1'
 }

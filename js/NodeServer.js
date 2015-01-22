@@ -58,7 +58,7 @@ function NodeServer() {
       gs.sp(closure,"delegate",gs.map().add("req",req).add("resp",resp).add("render",function(it) {
         return gs.mc(resp,"send",[it]);
       }));
-      return (closure.delegate!=undefined?gs.applyDelegate(closure,closure.delegate,[]):gs.execCall(closure, this, []));
+      return gs.execCall(closure, this, []);
     }]);
   }
   gSobject['on'] = function(path, closure) {
@@ -77,7 +77,7 @@ function NodeServer() {
 NodeServer.server = function(closure) {
   var nodeServer = NodeServer();
   gs.sp(closure,"delegate",nodeServer);
-  (closure.delegate!=undefined?gs.applyDelegate(closure,closure.delegate,[]):gs.execCall(closure, this, []));
+  gs.execCall(closure, this, []);
   return gs.map().add("start",function(it) {
     gs.mc(nodeServer,"listenSockets",[]);
     return gs.mc(nodeServer,"startNodeJsServer",[]);

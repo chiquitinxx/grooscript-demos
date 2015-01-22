@@ -4,7 +4,3 @@ requirejs.config({
       jquery: 'jquery.min'
     }
 });
-
-requirejs(['jquery', 'grooscript.min', 'grooscript-tools'], function($) {
-
-});

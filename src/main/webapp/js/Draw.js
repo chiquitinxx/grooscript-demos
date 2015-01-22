@@ -23,7 +23,7 @@ function Draw() {
     var movex = gs.mc(gSobject.r,"nextInt",[gSobject.ctxWidth]);
     var movey = gs.mc(gSobject.r,"nextInt",[gSobject.ctxHeight]);
     var finalPoints = gs.mc(points,"collect",[function(it) {
-      return gs.map().add("x",gs.plus((gs.minus(gs.gp(it,"x"), (gSobject.maxWidth / 2))), movex)).add("y",gs.plus((gs.minus(gs.gp(it,"y"), (gSobject.maxHeight / 2))), movey));
+      return gs.map().add("x",gs.plus((gs.minus(gs.gp(it,"x"), (gs.div(gSobject.maxWidth, 2)))), movex)).add("y",gs.plus((gs.minus(gs.gp(it,"y"), (gs.div(gSobject.maxHeight, 2)))), movey));
     }]);
     return gs.mc(gSobject,"drawBezier",[finalPoints]);
   }
@@ -34,14 +34,14 @@ function Draw() {
     var yList = gs.mc(points,"collect",[function(it) {
       return gs.gp(it,"y");
     }]);
-    var color = gSobject.colors [ gs.mc(gSobject.r,"nextInt",[4])];
+    var color = gSobject.colors[gs.mc(gSobject.r,"nextInt",[4])];
     var width = gs.plus(gs.mc(gSobject.r,"nextInt",[30]), 35);
     return gs.mc(gs.range(1, Draw.PRECISSION, true),"each",[function(it) {
-      var posx = gs.mc(gSobject.functions,"nBezier",[it / Draw.PRECISSION, xList]);
-      var posy = gs.mc(gSobject.functions,"nBezier",[it / Draw.PRECISSION, yList]);
-      gs.mc(gSobject,"drawCircle",[posx, posy, color, it / width]);
+      var posx = gs.mc(gSobject.functions,"nBezier",[gs.div(it, Draw.PRECISSION), xList]);
+      var posy = gs.mc(gSobject.functions,"nBezier",[gs.div(it, Draw.PRECISSION), yList]);
+      gs.mc(gSobject,"drawCircle",[posx, posy, color, gs.div(it, width)]);
       if (gs.mc(gSobject.r,"nextInt",[100]) > 97) {
-        return gs.mc(gSobject,"drawCircle",[gs.plus(posx, 20), gs.plus(posy, 20), color, (it / width) / 2]);
+        return gs.mc(gSobject,"drawCircle",[gs.plus(posx, 20), gs.plus(posy, 20), color, gs.div((gs.div(it, width)), 2)]);
       };
     }]);
   }
