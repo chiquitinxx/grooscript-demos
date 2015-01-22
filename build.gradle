@@ -1,20 +1,21 @@
-plugins {
-    id "org.grooscript.conversion" version "0.10" //<1>
-}
+//plugins {
+//    id "org.grooscript.conversion" version "0.10" //<1>
+//}
 
-/*buildscript {
+buildscript {
     repositories {
-        mavenLocal()
-        mavenCentral()
+        //mavenLocal()
+        //mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:0.10-SNAPSHOT"
+        classpath "org.grooscript:grooscript-gradle-plugin:0.11"
     }
-}*/
+}
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
-//apply plugin: 'org.grooscript.conversion' //<2>
+apply plugin: 'org.grooscript.conversion' //<2>
 
 ext {
     groovyVersion = '2.4.0'
@@ -48,8 +49,7 @@ grooscript {
 }
 
 task convertReact(type: org.grooscript.gradle.ConvertTask) {
-    source = [//'src/main/groovy/react.groovy',
-              'src/main/groovy/react/TodoApp.groovy']
+    source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }
