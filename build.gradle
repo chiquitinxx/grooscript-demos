@@ -1,28 +1,15 @@
-//plugins {
-//    id "org.grooscript.conversion" version "0.10" //<1>
-//}
-
-buildscript {
-    repositories {
-        //mavenLocal()
-        //mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:0.11"
-    }
+plugins {
+    id "org.grooscript.conversion" version "0.12" //<1>
 }
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
-apply plugin: 'org.grooscript.conversion' //<2>
 
 ext {
     groovyVersion = '2.4.0'
 }
 
 repositories {
-    //mavenLocal()
     mavenCentral()
 }
 
@@ -97,17 +84,17 @@ task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
     //classPath
 }
 
-task groovyStars(type: org.grooscript.gradle.DaemonTask) {
-    source = ['src/main/groovy/raphael/Stars.groovy']
-    destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
-}
-
 task chat << {
     println 'Chat converted.'
 }
 
 chat.dependsOn chatTemplates, convertChatClient, convertChatServer
+
+task convertStars(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/raphael/Stars.groovy']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
 
 task convertSnap(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/snap/', 'src/main/groovy/snap.groovy']
@@ -120,6 +107,33 @@ task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }
+
+task convertAll << {
+    println 'All converted.'
+}
+
+task showInfo << {
+    println """
+For Node demos, you need Node.js installed and run :> npm install
+
+- Node.js console demo run:> node colors.js
+- Chat Node.js demo. Run server with:> node startChat.js  then browse to: http://localhost:5000/
+
+Browser demos:
+
+- Asciidoctor live conversion demo file://${project.projectDir}/src/main/webapp/asciidoctor.html
+- Pollock's paint demo file://${project.projectDir}/src/main/webapp/bezier.html
+- Firebase demo file://${project.projectDir}/src/main/webapp/firebase.html
+- 2048 game demo file://${project.projectDir}/src/main/webapp/game.html
+- React demo file://${project.projectDir}/src/main/webapp/react.html
+- Sigma map graph demo file://${project.projectDir}/src/main/webapp/sigma.html
+- Snap SVG Clock demo file://${project.projectDir}/src/main/webapp/snapsvg.html
+- Stars demo file://${project.projectDir}/src/main/webapp/stars.html
+"""
+}
+
+convertAll.dependsOn convert, convertReact, convertPaint, convertAsciidoctor, convertGame2048,
+        convertCountries, chat, convertStars, convertSnap, convertFirebase, showInfo
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'

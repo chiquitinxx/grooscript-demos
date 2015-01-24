@@ -14,14 +14,14 @@ Grooscript demos
 [Draw](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/paint/Draw.groovy)
 [Functions](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/paint/Functions.groovy)
 
-![Todo App](paint.png)
+![Painting App](img/paint.png)
 
 ## Creating components like [react.js](http://facebook.github.io/react/) but in Groovy [guide](http://grooscript.org/react_example.html)
 
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/react)
 [In action](http://grooscript.org/demo/react.html)
 
-![Todo App](todo.png)
+![Todo App](img/todo.png)
 
 ## Live conversions from [asciidoctor](http://asciidoctor.org/) to html
 
@@ -33,30 +33,30 @@ Grooscript demos
 
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/game)
 
-![Game](game.png)
+![Game](img/game.png)
 
 ## Interactive graphic search, see in [action](http://grooscript.org/demo/sigma.html)
 
 [Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/countries)
 
-![Countries](countries.png)
+![Countries](img/countries.png)
 
 ## Basic chat running in Node.js, deployed in Heroku [join](https://cryptic-headland-6974.herokuapp.com/) [+info](http://grooscript.org/chat_example.html)
 
 [Server](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/startServer.groovy)
 [Client](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/chat/Client.groovy)
 
-![Chat](newchat.png)
+![Chat](img/newchat.png)
 
 ## Svg clock, see in [action](http://grooscript.org/demo/snapsvg.html)
 
-![Chat](snapsvg.png)
+![Chat](img/snapsvg.png)
 
 Build
 ---
 
-In build.gradle, there are all the task to convert groovy files to javascript.
+In build.gradle, there are all the task to convert groovy files to javascript. Convert all demos with **./gradlew convertAll** :)
 
-You can open .html files in src/main/webapp to see the demos in the web.
+To get links and info to run demos run **./gradlew showInfo**
 
-To run the demos in Node.js (colors.js and startChat.js), you need Node.js installed, and run +npm install+ (maybe as sudo) to install dependencies.
+To run the demos in Node.js (colors.js and startChat.js), you need Node.js installed, and run **npm install** (maybe as sudo) to install dependencies.
