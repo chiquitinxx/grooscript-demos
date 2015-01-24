@@ -7,7 +7,7 @@ Grooscript demos
 
 [Dsl](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/Execute.groovy)
 
-![Node modules](node.png)
+![Node modules](img/node.png)
 
 ## Jackson Pollock painting demo, see in [action](http://grooscript.org/demo/bezier.html)
 
