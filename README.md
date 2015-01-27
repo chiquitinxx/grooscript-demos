@@ -52,6 +52,10 @@ Grooscript demos
 
 ![Chat](img/snapsvg.png)
 
+## See all stars moving [here](http://grooscript.org/demo/stars.html)
+
+![Stars](img/stars.png)
+
 Build
 ---
 
