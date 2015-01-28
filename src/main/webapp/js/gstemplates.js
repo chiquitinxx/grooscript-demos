@@ -2,8 +2,7 @@ function Templates() {
   var gSobject = gs.inherit(gs.baseClass,'Templates');
   gSobject.clazz = { name: 'org.grooscript.gradle.template.Templates', simpleName: 'Templates'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
-  gSobject.__defineGetter__('templates', function(){ return Templates.templates; });
-  gSobject.__defineSetter__('templates', function(gSval){ Templates.templates = gSval; });
+  Object.defineProperty(gSobject, 'templates', { get: function() { return Templates.templates; }, set: function(gSval) { Templates.templates = gSval; }, enumerable: true });
   gSobject.applyTemplate = function(x0,x1) { return Templates.applyTemplate(x0,x1); }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   

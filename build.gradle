@@ -1,5 +1,5 @@
 plugins {
-    id "org.grooscript.conversion" version "0.12" //<1>
+    id "org.grooscript.conversion" version "1.0.0" //<1>
 }
 
 apply plugin: 'idea'
@@ -16,7 +16,7 @@ repositories {
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:1.0.0-rc-2') {
+    compile ('org.grooscript:grooscript:1.0.0') {
         exclude module: 'groovy'
     }
     testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {

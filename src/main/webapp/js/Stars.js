@@ -3,8 +3,7 @@ function Stars() {
   var gSobject = gs.inherit(gs.baseClass,'Stars');
   gSobject.clazz = { name: 'raphael.Stars', simpleName: 'Stars'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
-  gSobject.__defineGetter__('STARS_NUMBER', function(){ return Stars.STARS_NUMBER; });
-  gSobject.__defineSetter__('STARS_NUMBER', function(gSval){ Stars.STARS_NUMBER = gSval; });
+  Object.defineProperty(gSobject, 'STARS_NUMBER', { get: function() { return Stars.STARS_NUMBER; }, set: function(gSval) { Stars.STARS_NUMBER = gSval; }, enumerable: true });
   gSobject.context = null;
   gSobject.groovyImage = null;
   gSobject.grailsImage = null;

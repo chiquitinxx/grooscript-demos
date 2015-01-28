@@ -13,8 +13,8 @@ function NodeJs() {
   gSobject.red = function(x1) { return JsColors.red(gSobject,x1); }
   gSobject.bold = function(x1) { return JsColors.bold(gSobject,x1); }
   JsColors.$init$(gSobject);
-  gSobject.grey = function(x1) { return JsColors.grey(gSobject,x1); }
   gSobject.rainbow = function(x1) { return JsColors.rainbow(gSobject,x1); }
+  gSobject.grey = function(x1) { return JsColors.grey(gSobject,x1); }
   gSobject.module = function(name) {
     try {
             global[name] = require(name);

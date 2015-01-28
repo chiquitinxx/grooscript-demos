@@ -6,10 +6,8 @@ function Draw() {
   gSobject.functions = Functions();
   gSobject.r = gs.random();
   gSobject.colors = gs.list([gs.map().add("r",232).add("g",51).add("b",1) , gs.map().add("r",248).add("g",179).add("b",10) , gs.map().add("r",247).add("g",239).add("b",189) , gs.map().add("r",29).add("g",16).add("b",8)]);
-  gSobject.__defineGetter__('PRECISSION', function(){ return Draw.PRECISSION; });
-  gSobject.__defineSetter__('PRECISSION', function(gSval){ Draw.PRECISSION = gSval; });
-  gSobject.__defineGetter__('N_GRADES', function(){ return Draw.N_GRADES; });
-  gSobject.__defineSetter__('N_GRADES', function(gSval){ Draw.N_GRADES = gSval; });
+  Object.defineProperty(gSobject, 'PRECISSION', { get: function() { return Draw.PRECISSION; }, set: function(gSval) { Draw.PRECISSION = gSval; }, enumerable: true });
+  Object.defineProperty(gSobject, 'N_GRADES', { get: function() { return Draw.N_GRADES; }, set: function(gSval) { Draw.N_GRADES = gSval; }, enumerable: true });
   gSobject.maxWidth = 500;
   gSobject.maxHeight = 500;
   gSobject.ctx = null;
