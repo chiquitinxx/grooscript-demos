@@ -108,6 +108,12 @@ task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
+task convertThree(type: org.grooscript.gradle.DaemonTask) {
+    source = ['src/main/groovy/three/']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
 task convertAll << {
     println 'All converted.'
 }
