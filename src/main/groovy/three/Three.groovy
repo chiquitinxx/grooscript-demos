@@ -28,6 +28,8 @@ class Three {
 
     def methodMissing(String name, args) {
         def mesh = newMesh(name.capitalize(), *args)
+        mesh.metaClass.rotateLeft = { ob -> ob.rotation.y -= 0.02 }.curry(mesh)
+        mesh.metaClass.moveTo = { ob, x, y, z -> ob.position.set(x, y, z) }.curry(mesh)
         scene.add mesh
         items << mesh
         mesh
