@@ -5,11 +5,11 @@ package three
  */
 
 Three.scene {
-    tetrahedron(200) position.set (-360, 300, 300)
-    icosahedron(200) position.set (360, 200, 300)
-    sphere(100, 50, 50) position.set (-300, -200, 100)
-    torus(200, 50, 50, 50).position.set (-300, -200, 100)
-    ring(20, 200, 50).position.set (450, -200, 100)
+    tetrahedron 200 moveTo -360, 300, 300
+    icosahedron 200 moveTo 360, 200, 300
+    sphere 100, 50, 50 moveTo -300, -200, 100
+    torus 200, 50, 50, 50 moveTo -300, -200, 100
+    ring 20, 200, 50 moveTo 450, -200, 100
     setMaterial(grooscriptMaterial)
     box 200, 200, 200
 }.animate { items ->
@@ -18,6 +18,6 @@ Three.scene {
         it.rotation.y += 0.02
     }
     items.findAll { it.name == 'Box' }.each {
-        it.rotation.y -= 0.02
+        it.rotateLeft()
     }
 }

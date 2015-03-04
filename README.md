@@ -56,6 +56,12 @@ Grooscript demos
 
 ![Stars](img/stars.png)
 
+## Three.js objects [here](http://grooscript.org/demo/three.html)
+
+[Source code](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/three)
+
+![Three.js](img/three.png)
+
 Build
 ---
 
