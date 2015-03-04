@@ -18,17 +18,13 @@ function Three() {
     return gs.mc(gSobject.renderer,"render",[gSobject.scene, gSobject.camera]);
   }
   gSobject['methodMissing'] = function(name, args) {
-<<<<<<< HEAD
     var mesh = gs.mc(gSobject,"newMesh",gs.list([gs.mc(name,"capitalize",[]), new gs.spread(args)]));
-=======
-    var mesh = gs.mc(gSobject,"newMesh",[gs.mc(name,"capitalize",[]), new gs.spread(args)]);
     gs.sp((mesh = gs.metaClass(mesh)),"rotateLeft",gs.mc(function(ob) {
       return gs.sp(gs.gp(ob,"rotation"),"y",gs.gp(gs.gp(ob,"rotation"),"y") - 0.02);
     },"curry",[mesh]));
     gs.sp((mesh = gs.metaClass(mesh)),"moveTo",gs.mc(function(ob, x, y, z) {
       return gs.mc(gs.gp(ob,"position"),"set",[x, y, z]);
     },"curry",[mesh]));
->>>>>>> b8567d44a9b763bb210f17cfcf42b1771a82a93e
     gs.mc(gSobject.scene,"add",[mesh]);
     gs.mc(gSobject.items,'leftShift', gs.list([mesh]));
     return mesh;
