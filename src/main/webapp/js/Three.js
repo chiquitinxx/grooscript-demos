@@ -18,7 +18,7 @@ function Three() {
     return gs.mc(gSobject.renderer,"render",[gSobject.scene, gSobject.camera]);
   }
   gSobject['methodMissing'] = function(name, args) {
-    var mesh = gs.mc(gSobject,"newMesh",[gs.mc(name,"capitalize",[]), new gs.spread(args)]);
+    var mesh = gs.mc(gSobject,"newMesh",gs.list([gs.mc(name,"capitalize",[]), new gs.spread(args)]));
     gs.mc(gSobject.scene,"add",[mesh]);
     gs.mc(gSobject.items,'leftShift', gs.list([mesh]));
     return mesh;

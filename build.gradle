@@ -1,5 +1,5 @@
 plugins {
-    id "org.grooscript.conversion" version "1.0.0" //<1>
+    id "org.grooscript.conversion" version "1.0.1" //<1>
 }
 
 apply plugin: 'idea'
@@ -16,10 +16,10 @@ repositories {
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:1.0.0') {
+    compile ('org.grooscript:grooscript:1.0.1') {
         exclude module: 'groovy'
     }
-    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
     }
     testCompile 'cglib:cglib-nodep:2.2.2'
@@ -108,8 +108,20 @@ task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
-task convertThree(type: org.grooscript.gradle.DaemonTask) {
+task convertThree(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/three/']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
+task convertAngular(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/angular']
+    destination = 'src/main/webapp/js'
+    classPath = ['src/main/groovy']
+}
+
+task convertRxJs(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/rxjs']
     destination = 'src/main/webapp/js'
     classPath = ['src/main/groovy']
 }
@@ -135,11 +147,16 @@ Browser demos:
 - Sigma map graph demo file://${project.projectDir}/src/main/webapp/sigma.html
 - Snap SVG Clock demo file://${project.projectDir}/src/main/webapp/snapsvg.html
 - Stars demo file://${project.projectDir}/src/main/webapp/stars.html
+- Three.js demo file://${project.projectDir}/src/main/webapp/three.html
+- Angular.js demo file://${project.projectDir}/src/main/webapp/angular.html
+- Angular.js second approach demo file://${project.projectDir}/src/main/webapp/angularTwo.html
+- RxJS demo file://${project.projectDir}/src/main/webapp/autocomplete.html
 """
 }
 
 convertAll.dependsOn convert, convertReact, convertPaint, convertAsciidoctor, convertGame2048,
-        convertCountries, chat, convertStars, convertSnap, convertFirebase, showInfo
+        convertCountries, chat, convertStars, convertSnap, convertFirebase, showInfo, convertThree,
+        convertAngular, convertRxJs
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'

@@ -8,6 +8,9 @@ JsColors.gSaT = function(target) {
 };
 JsColors.$init$ = function($self) {
 }
+function JsColors$static$init$($static$self){
+  
+};
 JsColors.red = function($self, msg) {
   console.log(msg.red);
 }
