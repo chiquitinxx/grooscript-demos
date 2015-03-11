@@ -6,7 +6,7 @@ apply plugin: 'idea'
 apply plugin: 'groovy'
 
 ext {
-    groovyVersion = '2.4.0'
+    groovyVersion = '2.4.1'
 }
 
 repositories {
@@ -18,6 +18,7 @@ dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
     compile ('org.grooscript:grooscript:1.0.1') {
         exclude module: 'groovy'
+        exclude module: 'groovy-json'
     }
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude module: 'groovy-all'
@@ -151,6 +152,7 @@ Browser demos:
 - Angular.js demo file://${project.projectDir}/src/main/webapp/angular.html
 - Angular.js second approach demo file://${project.projectDir}/src/main/webapp/angularTwo.html
 - RxJS demo file://${project.projectDir}/src/main/webapp/autocomplete.html
+- RxJS demo two file://${project.projectDir}/src/main/webapp/autocompleteTwo.html
 """
 }
 
