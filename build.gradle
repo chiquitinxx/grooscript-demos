@@ -138,6 +138,8 @@ For Node demos, you need Node.js installed and run :> npm install
 - Node.js console demo run:> node colors.js
 - Chat Node.js demo. Run server with:> node startChat.js  then browse to: http://localhost:5000/
 
+- For react.js native demo, use task convertReactNative, and take a look at js/awesome.js
+
 Browser demos:
 
 - Asciidoctor live conversion demo file://${project.projectDir}/src/main/webapp/asciidoctor.html
@@ -162,4 +164,28 @@ convertAll.dependsOn convert, convertReact, convertPaint, convertAsciidoctor, co
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2.1'
+}
+
+task convertReactNative(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/reactNative/awesome.groovy']
+    destination = 'js'
+    classPath = ['src/main/groovy']
+    mainContextScope = ['React', 'StyleSheet', 'View', 'Text']
+    initialText = '''//Grooscript example using reactjs native to create ios app
+//Starting react native getting started: http://facebook.github.io/react-native/docs/getting-started.html#content
+//and replace index.ios.js with this file
+'use strict';
+
+var React = require('react-native');
+var {
+    AppRegistry,
+    StyleSheet,
+    Text,
+    Image,
+    View,
+} = React;
+
+var gs = require('grooscript');
+'''
+    finalText = 'AppRegistry.registerComponent(\'AwesomeProject\', () => AwesomeProject);'
 }
