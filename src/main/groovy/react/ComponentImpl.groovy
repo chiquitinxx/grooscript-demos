@@ -68,30 +68,30 @@ public class ComponentImpl implements ASTTransformation {
 
     private addDrawMethod(ClassNode classNode) {
         classNode.addMethod('draw', Modifier.PUBLIC, null, Parameter.EMPTY_ARRAY,
-                ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromCode {
+                ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromString('''
             this.render()
             gQuery.attachMethodsToDomEvents(this)
-        }[0])
+        ''')[0])
     }
 
     private addStartMethod(ClassNode classNode) {
         def params = new Parameter[1]
         params[0] = new Parameter(ClassHelper.STRING_TYPE, 'selector')
         classNode.addMethod('start', Modifier.PUBLIC, null, params,
-                ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromCode {
+                ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromString('''
             this.selector = selector
             this.init()
             this.draw()
-        }[0])
+        ''')[0])
     }
 
     private manageRenderMethod(ClassNode classNode) {
         MethodNode renderMethod = classNode.methods.find { it.name == 'render'}
         if (!renderMethod) {
             classNode.addMethod('render', Modifier.PUBLIC, null, Parameter.EMPTY_ARRAY,
-                    ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromCode {
+                    ClassNode.EMPTY_ARRAY, new AstBuilder().buildFromString('''
                 //Nothing to do
-            }[0])
+            ''')[0])
         } else {
             BlockStatement actualCode = (BlockStatement)renderMethod.code
 

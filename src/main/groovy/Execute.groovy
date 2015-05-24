@@ -12,7 +12,6 @@ nodejs {
         { countBodyChars 'http://bintray.com' },
         { countBodyChars 'http://google.com' },
         { countBodyChars 'http://twitter.com' },
-        { countBodyChars 'http://groovy.codehaus.org' },
         { countBodyChars 'http://gradle.org' },
         { bold '\nReading url\'s...\n' },
     ])

@@ -9,7 +9,7 @@ function HtmlBuilder() {
         return gSobject.htmCd += " " + (key) + "='" + (value) + "'";
       }]);
     };
-    gSobject.htmCd += ">";
+    gSobject.htmCd += (!gs.bool(args) ? "/>" : ">");
     if (gs.bool(args)) {
       if ((gs.equals(gs.mc(args,"size",[]), 1)) && (gs.instanceOf((args[0]), "String"))) {
         gs.mc(gSobject,"yield",[args[0]]);
@@ -23,8 +23,8 @@ function HtmlBuilder() {
           gs.mc(gSobject,"yield",[lastArg]);
         };
       };
+      return gSobject.htmCd += "</" + (name) + ">";
     };
-    return gSobject.htmCd += "</" + (name) + ">";
   };
   gSobject.htmCd = null;
   gSobject.build = function(x0) { return HtmlBuilder.build(x0); }
@@ -278,13 +278,13 @@ function GQueryImpl() {
       if (gs.mc(gs.gp(method,"name"),"endsWith",["Change"])) {
         var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 6)]);
         if (gs.mc(gSobject,"existsId",[shortName])) {
-          return gs.mc(gSobject,"onChange",[shortName, obj["" + (gs.gp(method,"name")) + ""]]);
+          return gs.mc(gSobject,"onChange",[gs.plus("#", shortName), obj["" + (gs.gp(method,"name")) + ""]]);
         };
       };
     }]);
   }
-  gSobject.onChange = function(id, closure) {
-    var sourceDom = $('#' + id);
+  gSobject.onChange = function(selector, closure) {
+    var sourceDom = $(selector);
 
         if (sourceDom.is(":text")) {
             sourceDom.bind('input', function() {
@@ -307,7 +307,7 @@ function GQueryImpl() {
                 closure($(this).val());
             });
         } else {
-            console.log('Not supporting onChange for id ' + id);
+            console.log('Not supporting onChange for selector: ' + selector);
         }
   }
   gSobject.focusEnd = function(selector) {

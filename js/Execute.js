@@ -13,8 +13,6 @@ NodeJs.nodejs(function(it) {
   } , function(it) {
     return gs.mc(this,"countBodyChars",["http://twitter.com"]);
   } , function(it) {
-    return gs.mc(this,"countBodyChars",["http://groovy.codehaus.org"]);
-  } , function(it) {
     return gs.mc(this,"countBodyChars",["http://gradle.org"]);
   } , function(it) {
     return gs.mc(this,"bold",["\nReading url's...\n"]);

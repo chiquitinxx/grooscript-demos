@@ -16,6 +16,8 @@ function ReactiveScript() {
     };
     return gSobject.selectors[name];
   }
+  gSobject['run'] = function(it) {
+  }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   
   return gSobject;
