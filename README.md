@@ -62,6 +62,10 @@ Grooscript demos
 
 ![Three.js](img/three.png)
 
+## Create a Rest API fake using npm faker and json-server
+
+[Source code](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/authors.groovy)
+
 Build
 ---
 
@@ -69,4 +73,4 @@ In build.gradle, there are all the task to convert groovy files to javascript. C
 
 To get links and info to run demos run **./gradlew showInfo**
 
-To run the demos in Node.js (colors.js and startChat.js), you need Node.js installed, and run **npm install** (maybe as sudo) to install dependencies.
+To run the demos in Node.js (colors.js, startChat.js and restApi), you need Node.js installed, and run **npm install** (maybe as sudo) to install dependencies.

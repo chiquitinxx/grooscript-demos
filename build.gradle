@@ -127,16 +127,24 @@ task convertRxJs(type: org.grooscript.gradle.ConvertTask) {
     classPath = ['src/main/groovy']
 }
 
+task convertJsonData(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/authors.groovy']
+    destination = 'js'
+    initialText = "var gs = require('grooscript');"
+}
+
 task convertAll << {
     println 'All converted.'
 }
 
 task showInfo << {
     println """
-For Node demos, you need Node.js installed and run :> npm install
+For Node demos, you need Node.js installed and run as sudo :> npm install
 
 - Node.js console demo run:> node colors.js
-- Chat Node.js demo. Run server with:> node startChat.js  then browse to: http://localhost:5000/
+- Chat Node.js demo. Run server with:> node startChat.js then browse to: http://localhost:5000/
+- Json server. You need json server installed with:> npm install -g json-server
+               Later run the server with:> json-server js/authors.js
 
 - For react.js native demo, use task convertReactNative, and take a look at js/awesome.js
 
@@ -160,7 +168,7 @@ Browser demos:
 
 convertAll.dependsOn convert, convertPaint, convertAsciidoctor, convertReact, convertGame2048,
         convertCountries, chat, convertStars, convertSnap, convertFirebase, showInfo, convertThree,
-        convertAngular, convertRxJs
+        convertAngular, convertRxJs, convertJsonData
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
