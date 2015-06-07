@@ -66,6 +66,11 @@ Grooscript demos
 
 [Source code](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/authors.groovy)
 
+## Google maps DSL
+
+[Source code](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/startMap.groovy)
+![Spain Map](img/map.png)
+
 Build
 ---
 

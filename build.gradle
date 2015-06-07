@@ -138,6 +138,11 @@ task convertJsonData(type: org.grooscript.gradle.ConvertTask) {
     initialText = "var gs = require('grooscript');"
 }
 
+task convertGoogleMaps(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/maps', 'src/main/groovy/startMap.groovy']
+    destination = 'src/main/webapp/js/map'
+}
+
 task convertAll << {
     println 'All converted.'
 }
@@ -168,12 +173,13 @@ Browser demos:
 - Angular.js second approach demo file://${project.projectDir}/src/main/webapp/angularTwo.html
 - RxJS demo file://${project.projectDir}/src/main/webapp/autocomplete.html
 - RxJS demo two file://${project.projectDir}/src/main/webapp/autocompleteTwo.html
+- Google maps demo file://${project.projectDir}/src/main/webapp/maps.html
 """
 }
 
 convertAll.dependsOn convert, convertPaint, convertAsciidoctor, convertReact, convertGame2048,
         convertCountries, chat, convertStars, convertSnap, convertFirebase, showInfo, convertThree,
-        convertAngular, convertRxJs, convertJsonData
+        convertAngular, convertRxJs, convertJsonData, convertGoogleMaps
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
