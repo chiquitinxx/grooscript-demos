@@ -48,7 +48,7 @@ class Faker {
     }
 }
 
-new Faker().exports('authors', 100, [
+new Faker().exports('authors', 3, [
         id: 'inc',
         name: 'name.firstName',
         city: 'address.city',

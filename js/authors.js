@@ -42,4 +42,4 @@ function Faker() {
   
   return gSobject;
 };
-gs.mc(Faker(),"exports",["authors", 100, gs.map().add("id","inc").add("name","name.firstName").add("city","address.city").add("image","image.image").add("birthDate","date.past").add("age","random.99")]);
+gs.mc(Faker(),"exports",["authors", 3, gs.map().add("id","inc").add("name","name.firstName").add("city","address.city").add("image","image.image").add("birthDate","date.past").add("age","random.99")]);

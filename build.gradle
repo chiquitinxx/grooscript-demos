@@ -1,5 +1,6 @@
 plugins {
     id "org.grooscript.conversion" version "1.1.1" //<1>
+    id "org.asciidoctor.convert" version "1.5.2"
 }
 
 apply plugin: 'idea'
@@ -7,6 +8,10 @@ apply plugin: 'groovy'
 
 ext {
     groovyVersion = '2.4.3'
+    grooscriptVersion = '1.1.1'
+    imagesDir = 'img'
+    docImagesDir = 'img'
+    jsDir = 'js'
 }
 
 repositories {
@@ -16,7 +21,7 @@ repositories {
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
-    compile ('org.grooscript:grooscript:1.1.1') {
+    compile ("org.grooscript:grooscript:${grooscriptVersion}") {
         exclude module: 'groovy'
         exclude module: 'groovy-json'
     }
@@ -141,8 +146,8 @@ task showInfo << {
     println """
 For Node demos, you need Node.js installed and run as sudo :> npm install
 
-- Node.js console demo run:> node colors.js
-- Chat Node.js demo. Run server with:> node startChat.js then browse to: http://localhost:5000/
+- Node.js console demo run:> node ${jsDir}/colors.js
+- Chat Node.js demo. Run server with:> node ${jsDir}/startChat.js then browse to: http://localhost:5000/
 - Json server. You need json server installed with:> npm install -g json-server
                Later run the server with:> json-server js/authors.js
 
@@ -197,3 +202,23 @@ var gs = require('grooscript');
 '''
     finalText = 'AppRegistry.registerComponent(\'AwesomeProject\', () => AwesomeProject);'
 }
+
+asciidoctor {
+    sourceDir = project.file 'doc'
+    attributes 'grooscript-version': grooscriptVersion,
+            author: 'Jorge Franco',
+            jsDir: project.file('js').path,
+            buildFile: project.file('./build.gradle').path,
+            sourcesDir: project.file('src/main/groovy').path,
+            templatesDir: project.file('src/main/webapp/templates').path,
+            email: 'grooscript@gmail.com',
+            'source-highlighter': 'prettify',
+            imagesdir: docImagesDir,
+            icons: 'font',
+            'index-file': 'index.html'
+    resources {
+        from imagesDir
+        into docImagesDir
+    }
+}
+
