@@ -20,7 +20,11 @@ repositories {
 
 dependencies { //<3>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+    compile group: 'org.codehaus.groovy', name: 'groovy-json', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
+    compile('io.reactivex:rxgroovy:1.0.0') {
+        exclude module: 'groovy-all'
+    }
     compile ("org.grooscript:grooscript:${grooscriptVersion}") {
         exclude module: 'groovy'
         exclude module: 'groovy-json'
@@ -146,6 +150,11 @@ task convertGoogleMaps(type: org.grooscript.gradle.ConvertTask) {
 task convertJQueryRest(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/rest', 'src/main/groovy/jQueryRest.groovy']
     destination = 'src/main/webapp/js/jqueryrest'
+}
+
+task convertDualRx(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/dualrx', 'src/main/groovy/observeRx.groovy']
+    destination = 'js'
 }
 
 task convertAll << {

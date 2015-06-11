@@ -7,7 +7,7 @@ import static rxjs.ReactiveResolver.reactive
 
 reactive {
     def searchWikipedia = { term ->
-        $.ajax(url: 'http://en.wikipedia.org/w/api.php',
+        jQuery.ajax(url: 'http://en.wikipedia.org/w/api.php',
             dataType: 'jsonp',
             data: toJavascript([
                     action: 'opensearch',
