@@ -143,6 +143,11 @@ task convertGoogleMaps(type: org.grooscript.gradle.ConvertTask) {
     destination = 'src/main/webapp/js/map'
 }
 
+task convertJQueryRest(type: org.grooscript.gradle.ConvertTask) {
+    source = ['src/main/groovy/rest', 'src/main/groovy/jQueryRest.groovy']
+    destination = 'src/main/webapp/js/jqueryrest'
+}
+
 task convertAll << {
     println 'All converted.'
 }
