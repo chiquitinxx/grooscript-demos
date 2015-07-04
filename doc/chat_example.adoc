@@ -81,7 +81,7 @@ To run this, created `startChat.js` file, only have to do `>node js/startChat.js
 
 [source,javascript]
 --
-include::{jsDir}/startChat.js[]
+include::{currentDir}/startChat.js[]
 --
 
 Now open your browser in `http://localhost:3000/[http://localhost:3000]` and the login div appears.

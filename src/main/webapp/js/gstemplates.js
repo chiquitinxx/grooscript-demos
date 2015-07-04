@@ -23,7 +23,7 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
           return gs.mc(Templates,"img",[gs.map().add("src","img/groovy.png").add("height",20)]);
         });
       } else {
-        gs.mc(Templates,"b",["" + (gs.fs('name', this)) + " "]);
+        gs.mc(Templates,"b",["" + (gs.gp(model,"name")) + " "]);
         return gs.mc(Templates,"yield",["joined the chat!"]);
       };
     }]);
@@ -32,10 +32,10 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
   if (model === undefined) model = gs.map();
   return gs.mc(HtmlBuilder,"build",[function(it) {
     return gs.mc(Templates,"li",[function(it) {
-      if (gs.mc(gs.mc(gs.fs('name', this),"toLowerCase",[]),"contains",["danveloper"])) {
+      if (gs.mc(gs.mc(gs.gp(model,"name"),"toLowerCase",[]),"contains",["danveloper"])) {
         return gs.mc(Templates,"b",["#unfollowdanveloper"]);
       } else {
-        gs.mc(Templates,"b",["" + (gs.fs('name', this)) + " "]);
+        gs.mc(Templates,"b",["" + (gs.gp(model,"name")) + " "]);
         return gs.mc(Templates,"yield",["left the chat."]);
       };
     }]);
@@ -45,12 +45,12 @@ Templates.templates = gs.map().add("join.gtpl",function(model) {
   return gs.mc(HtmlBuilder,"build",[function(it) {
     var pirateMessages = gs.list(["YARRRRR!" , "YO-HO!" , "Ahoy Boys!" , "Surrrrrender the booty!"]);
     return gs.mc(Templates,"li",[function(it) {
-      gs.mc(Templates,"b",["" + (gs.fs('name', this)) + ": "]);
-      if (gs.mc(gs.mc(gs.fs('name', this),"loLowerCase",[]),"contains",["pirate"])) {
+      gs.mc(Templates,"b",["" + (gs.gp(model,"name")) + ": "]);
+      if (gs.mc(gs.mc(gs.gp(model,"name"),"toLowerCase",[]),"contains",["pirate"])) {
         var randomNumber = gs.mc(gs.random(),"nextInt",[gs.mc(pirateMessages,"size",[])]);
-        return gs.mc(Templates,"yield",["" + (gs.fs('msg', this)) + " " + (pirateMessages[randomNumber]) + ""]);
+        return gs.mc(Templates,"yield",["" + (gs.gp(model,"msg")) + " " + (pirateMessages[randomNumber]) + ""]);
       } else {
-        return gs.mc(Templates,"yield",[gs.fs('msg', this)]);
+        return gs.mc(Templates,"yield",[gs.gp(model,"msg")]);
       };
     }]);
   }]);

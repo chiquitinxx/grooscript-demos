@@ -1,5 +1,5 @@
 plugins {
-    id "org.grooscript.conversion" version "1.1.1" //<1>
+    id "org.grooscript.conversion" version "1.1.2" //<1>
     id "org.asciidoctor.convert" version "1.5.2"
 }
 
@@ -8,7 +8,7 @@ apply plugin: 'groovy'
 
 ext {
     groovyVersion = '2.4.3'
-    grooscriptVersion = '1.1.1'
+    grooscriptVersion = '1.1.2'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
@@ -166,7 +166,7 @@ task showInfo << {
 For Node demos, you need Node.js installed and run as sudo :> npm install
 
 - Node.js console demo run:> node ${jsDir}/colors.js
-- Chat Node.js demo. Run server with:> node ${jsDir}/startChat.js then browse to: http://localhost:5000/
+- Chat Node.js demo. Run server with:> node startChat.js then browse to: http://localhost:5000/
 - Json server. You need json server installed with:> npm install -g json-server
                Later run the server with:> json-server js/authors.js
 
@@ -228,6 +228,7 @@ asciidoctor {
     attributes 'grooscript-version': grooscriptVersion,
             author: 'Jorge Franco',
             jsDir: project.file('js').path,
+            currentDir: project.file('.').path,
             buildFile: project.file('./build.gradle').path,
             sourcesDir: project.file('src/main/groovy').path,
             templatesDir: project.file('src/main/webapp/templates').path,

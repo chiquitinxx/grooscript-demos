@@ -4,7 +4,7 @@ import org.grooscript.asts.GsNative
 
 class GrooscriptObservable<T> {
 
-    Observable observable
+    def observable
 
     GrooscriptObservable(List list) {
         this.observable = platformObservable(list)
@@ -14,12 +14,12 @@ class GrooscriptObservable<T> {
         this.observable."$name"(*args)
     }
 
-    static fromList(List list) {
+    static fromList(List<T> list) {
         new GrooscriptObservable(list)
     }
 
     @GsNative
-    private platformObservable(List list) {/*
+    private platformObservable(List<T> list) {/*
         return Rx.Observable.from(list);
     */
         Class.forName("rx.Observable").invokeMethod("from", list)

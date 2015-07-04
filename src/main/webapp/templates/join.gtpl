@@ -4,7 +4,7 @@ li {
             img src: 'img/groovy.png', height: 20
         }
     } else {
-        b "${name} "
+        b "${model.name} "
         yield 'joined the chat!'
     }
 }

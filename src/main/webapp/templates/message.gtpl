@@ -1,11 +1,11 @@
 def pirateMessages = ['YARRRRR!', 'YO-HO!', 'Ahoy Boys!', 'Surrrrrender the booty!']
 
 li {
-    b "${name}: "
-    if (name.loLowerCase().contains('pirate')) {
+    b "${model.name}: "
+    if (model.name.toLowerCase().contains('pirate')) {
         def randomNumber = new Random().nextInt(pirateMessages.size())
-        yield "${msg} ${pirateMessages[randomNumber]}"
+        yield "${model.msg} ${pirateMessages[randomNumber]}"
     } else {
-        yield msg
+        yield model.msg
     }
 }

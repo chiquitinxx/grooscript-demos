@@ -61,7 +61,7 @@ React.renderComponent(TodoApp(null), mountNode);
 
 [source,groovy]
 --
-include::src/main/groovy/react/TodoApp.groovy[]
+include::{sourcesDir}/react/TodoApp.groovy[]
 --
 <1> AST that do all react job.
 <2> List of all TODO's added.
@@ -75,7 +75,7 @@ For the execution in javascript, I have used this groovy script:
 
 [source,groovy]
 --
-include::src/main/groovy/react.groovy[]
+include::{sourcesDir}/react.groovy[]
 --
 <1> Little helper class that comes with grooscript to do some jQuery stuff.
 <2> Call init function in the component.

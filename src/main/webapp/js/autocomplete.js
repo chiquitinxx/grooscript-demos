@@ -20,7 +20,7 @@ ReactiveResolver.reactive = function(cl) {
 
 ReactiveResolver.reactive(function(it) {
   var searchWikipedia = function(term) {
-    return gs.mc(gs.mc(gs.fs('$', this),"ajax",[gs.map().add("url","http://en.wikipedia.org/w/api.php").add("dataType","jsonp").add("data",gs.toJavascript(gs.map().add("action","opensearch").add("format","json").add("search",gs.mc(gs.fs('window', this),"encodeURI",[term]))))]),"promise",[]);
+    return gs.mc(gs.mc(gs.fs('jQuery', this),"ajax",[gs.map().add("url","http://en.wikipedia.org/w/api.php").add("dataType","jsonp").add("data",gs.toJavascript(gs.map().add("action","opensearch").add("format","json").add("search",gs.mc(gs.fs('window', this),"encodeURI",[term]))))]),"promise",[]);
   };
   var results = gs.mc(this,"$",["#results"]);
   var textInput = gs.mc(this,"$",["#textInput"]);

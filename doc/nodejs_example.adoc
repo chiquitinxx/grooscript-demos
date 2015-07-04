@@ -32,7 +32,7 @@ Is a node.js project, but we will use gradle to work with groovy files and conve
 
 [source,groovy]
 --
-include::build.gradle[]
+include::{currentDir}/build.gradle[]
 --
 <1> Get grooscript gradle plugin from bintray.
 <2> Use it.
@@ -51,7 +51,7 @@ Now, let's take a look to +colors.js+ code. The Node.js application that you run
 
 [source,javascript]
 --
-include::colors.js[]
+include::{jsDir}/colors.js[]
 --
 <1> Grooscript module, needed if you use groovy converted code in your application.
 <2> The javascript converted file with the code of our application.
@@ -64,7 +64,7 @@ use the tools you know, as Spock, Codenarc, Gradle,... always better than use ja
 
 [source,groovy]
 --
-include::src/main/groovy/Execute.groovy[]
+include::{sourcesDir}/Execute.groovy[]
 --
 <1> Color output in your console using colors.js module.
 <2> Add node.js modules.
@@ -72,7 +72,7 @@ include::src/main/groovy/Execute.groovy[]
 
 [source,groovy]
 --
-include::src/main/groovy/nodejs/NodeJs.groovy[]
+include::{sourcesDir}/nodejs/NodeJs.groovy[]
 --
 <1> Out groovy class implements a trait.
 <2> This AST will put in your js method the code between /* and */
@@ -85,7 +85,7 @@ Finally the trait with the functions to color our console info +JsColors.groovy+
 
 [source,groovy]
 --
-include::src/main/groovy/colors/JsColors.groovy[]
+include::{sourcesDir}/colors/JsColors.groovy[]
 --
 
 All this groovy code is converted to javascript and will run in your Node.js application.

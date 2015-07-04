@@ -24,7 +24,7 @@ function CountriesPresenter() {
         }]) != null) {
           return gs.mc(gSobject.customSigma,"addEdge",[gs.plus(gs.gp(country,"alpha3Code"), border), gs.gp(country,"alpha3Code"), border]);
         };
-      }]);
+      }], null, true);
     }]);
     gs.mc(gSobject,"updateNumberCountries",[gs.mc(gSobject.countries,"size",[])]);
     return gs.mc(gSobject.customSigma,"refresh",[]);

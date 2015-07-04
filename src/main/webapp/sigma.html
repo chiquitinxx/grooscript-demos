@@ -34,7 +34,7 @@
             presenter['loadCountries'] = function() {
                 return gs.toGroovy(json);
             };
-            presenter.gQuery.onChange('countrySearch', presenter.onChangeCountry);
+            presenter.gQuery.onChange('#countrySearch', presenter.onChangeCountry);
             console.log('Loading countries...');
             presenter.start();
             console.log('All done.');

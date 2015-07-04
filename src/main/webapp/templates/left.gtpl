@@ -1,8 +1,8 @@
 li {
-    if (name.toLowerCase().contains('danveloper')) {
+    if (model.name.toLowerCase().contains('danveloper')) {
         b '#unfollowdanveloper'
     } else {
-        b "${name} "
+        b "${model.name} "
         yield 'left the chat.'
     }
 }
