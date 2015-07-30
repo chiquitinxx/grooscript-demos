@@ -1,7 +1,7 @@
 import static nodejs.NodeJs.nodejs
 
 nodejs {
-    rainbow '\nGrooscript in action 2014!' //<1>
+    rainbow '\nGrooscript in action 2015!' //<1>
     red     '--------------------------\n'
 
     module 'request' //<2>

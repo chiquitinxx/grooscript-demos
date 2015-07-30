@@ -71,7 +71,7 @@ include::{sourcesDir}/react/TodoApp.groovy[]
 <6> On 'Add TODO' click.
 <7> Html dsl that renders the component.
 
-For the execution in javascript, I have used this groovy script:
+For the execution in javascript, I have used this groovy script (react.groovy):
 
 [source,groovy]
 --
@@ -92,19 +92,22 @@ include::{sourcesDir}/react.groovy[]
 * You can use traits, AST's, a little of inheritance, DSL's, a bit of meta-programming,... and a lot of groovy magic in your application.
 * You don't have to use any pre-processor as react.js does, just converting the code to javascript applies the AST's.
 
-=== Progress
+=== Implementation
 
-Example implementation not yet finished, during this months, this example, and other examples will be done.
-Version 1.0 of grooscript is coming soon, and the best release way, is use the library. If you have an idea
-to do with grooscript, go for it!
+The code is implemented as part of the grooscript-demos project on https://github.com/chiquitinxx/grooscript-demos[github], and you
+can see in action in grooscript http://grooscript.org[homepage]. Just with grooscript I convert `TodoApp.groovy` and `react.groovy` files
+to javascript and add them with `grooscript.js`, `grooscript-tools.js` and `jquery.js` to html:
 
-I have to implement the AST, and add more features to jQueryImpl, but you can see the result link:react.html[here]
+[source,html]
+--
+include::{webDir}/react.html[]
+--
 
-You can take a look at the code on https://github.com/chiquitinxx/colors/tree/master/src/main/groovy/react[Github]
+You can take a look at the source code on https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/react[Github]
 
 === Conclusion
 
-Implement things in http://beta.groovy-lang.org/[groovy] is a pleasure, and now, with grooscript, you can create nice pieces
+Implement things in http://groovy-lang.org/[groovy] is a pleasure, and now, with grooscript, you can create nice pieces
 of code that will run smooth in your browser. This is just a suggestion, loads of new ideas can be created
 in the browser or node.js using groovy and grooscript.
 

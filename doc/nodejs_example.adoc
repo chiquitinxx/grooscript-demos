@@ -10,21 +10,18 @@ http://nodejs.org[Node.js] application. I think node isn't the best idea in your
 good things, as a very big community and lot of modules. Also, that application runs very fast.
 
 
-The source code of this example is in https://github.com/chiquitinxx/colors[github]. You need node.js, and some
-http://www.npmjs.org/[npm] modules. Only grooscript module is needed to use grooscript converted code, rest
-of modules are used for fun in this example. Install node.js, then install modules:
+The source code of this example is part of grooscript demos project on https://github.com/chiquitinxx/grooscript-demos[github].
+You need node.js, and some http://www.npmjs.org/[npm] modules. Only grooscript module is needed to use grooscript converted code, rest
+of modules are used for fun in this example. Install node.js, then install modules, maybe with sudo:
 
 [source,bash]
 --
-> npm install grooscript
-> npm install colors
-> npm install request
-> npm install async
+> npm install
 --
 
 Also you need https://github.com/chiquitinxx/grooscript-gradle-plugin[grooscript gradle plugin] to convert groovy
 code to javascript. Install http://www.gradle.org[gradle] if you don't have it installed in your machine. You can use
-http://gvmtool.net[Gvm] to install gradle 2.0.
+http://gvmtool.net[Gvm] to install gradle {gradleVersion}.
 
 === Gradle
 
@@ -32,7 +29,7 @@ Is a node.js project, but we will use gradle to work with groovy files and conve
 
 [source,groovy]
 --
-include::{currentDir}/build.gradle[]
+include::{currentDir}/build.gradle[tags=conf]
 --
 <1> Get grooscript gradle plugin from bintray.
 <2> Use it.
@@ -92,9 +89,9 @@ All this groovy code is converted to javascript and will run in your Node.js app
 
 === Run it
 
-If your groovy code is converted to javascript, a file +js/Execute.js+ must exist. To convert +Execute.groovy+
-use +> ./gradlew convert+. If some error, as compilation error, or conversion failure, you get info in the console.
-If all is ok, just run the application with +> node colors.js+
+If your groovy code is converted to javascript, a file `js/Execute.js` must exist. To convert `Execute.groovy`
+use `> ./gradlew convert`. If some error, as compilation error, or conversion failure, you get info in the console.
+If all is ok, just run the application with `> node js/colors.js`
 
 This application use some nice Node.js modules, as show console messages in console, get content from url's,
 or launch tasks concurrently.

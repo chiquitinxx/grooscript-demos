@@ -1,6 +1,6 @@
 //Grooscript converted file
 NodeJs.nodejs(function(it) {
-  gs.mc(this,"rainbow",["\nGrooscript in action 2014!"]);
+  gs.mc(this,"rainbow",["\nGrooscript in action 2015!"]);
   gs.mc(this,"red",["--------------------------\n"]);
   gs.mc(this,"module",["request"]);
   gs.mc(this,"module",["async"]);

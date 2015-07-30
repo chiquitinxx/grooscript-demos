@@ -1,20 +1,35 @@
+// tag::conf[]
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'org.grooscript:grooscript-gradle-plugin:1.2.0-SNAPSHOT'
+    }
+}
+
 plugins {
-    id "org.grooscript.conversion" version "1.1.2" //<1>
+    //id "org.grooscript.conversion" version "1.1.2" //<1>
     id "org.asciidoctor.convert" version "1.5.2"
 }
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
+apply plugin: 'org.grooscript.conversion'
+
 
 ext {
-    groovyVersion = '2.4.3'
-    grooscriptVersion = '1.1.2'
+    groovyVersion = '2.4.4'
+    gradleCurrentVersion = '2.5'
+    grooscriptVersion = '1.2.0-SNAPSHOT'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -41,57 +56,50 @@ grooscript {
               'src/main/groovy/colors/JsColors.groovy'
     ] //<4>
     destination = 'js' //<5>
-    classPath = ['src/main/groovy'] //<7>
+    classpath = ['src/main/groovy'] //<7>
     initialText = '//Grooscript converted file'
 }
+// end::conf[]
 
 task convertReact(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertPaint(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/paint/Functions.groovy', 'src/main/groovy/paint/Draw.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertAsciidoctor(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/asciidoctor/AdocLive.groovy', 'src/main/groovy/startLiveAdoc.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertGame2048(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/game']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertCountries(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/countries']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertChatServer(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/chat/NodeServer.groovy', 'src/main/groovy/startServer.groovy']
     destination = 'js'
-    classPath = ['src/main/groovy']
 }
 
 task convertChatClient(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/chat/Client.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task chatTemplates(type: org.grooscript.gradle.TemplatesTask) {
     templatesPath = 'src/main/webapp/templates'
     templates = ['join.gtpl', 'left.gtpl', 'message.gtpl', 'index.gtpl']
     destinationFile = 'src/main/webapp/js/gstemplates.js'
-    //classPath
 }
 
 task chat << {
@@ -103,37 +111,31 @@ chat.dependsOn chatTemplates, convertChatClient, convertChatServer
 task convertStars(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/raphael/Stars.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertSnap(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/snap/', 'src/main/groovy/snap.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertFirebase(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/firebase/', 'src/main/groovy/firebaseAction.groovy']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertThree(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/three/']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertAngular(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/angular']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertRxJs(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/rxjs']
     destination = 'src/main/webapp/js'
-    classPath = ['src/main/groovy']
 }
 
 task convertJsonData(type: org.grooscript.gradle.ConvertTask) {
@@ -196,13 +198,12 @@ convertAll.dependsOn convert, convertPaint, convertAsciidoctor, convertReact, co
         convertAngular, convertRxJs, convertJsonData, convertGoogleMaps
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+    gradleVersion = gradleCurrentVersion
 }
 
 task convertReactNative(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/reactNative/awesome.groovy']
     destination = 'js'
-    classPath = ['src/main/groovy']
     mainContextScope = ['React', 'StyleSheet', 'View', 'Text']
     initialText = '''//Grooscript example using reactjs native to create ios app
 //Starting react native getting started: http://facebook.github.io/react-native/docs/getting-started.html#content
@@ -231,7 +232,9 @@ asciidoctor {
             currentDir: project.file('.').path,
             buildFile: project.file('./build.gradle').path,
             sourcesDir: project.file('src/main/groovy').path,
+            webDir: project.file('src/main/webapp').path,
             templatesDir: project.file('src/main/webapp/templates').path,
+            gradleVersion: gradleCurrentVersion,
             email: 'grooscript@gmail.com',
             'source-highlighter': 'prettify',
             imagesdir: docImagesDir,
