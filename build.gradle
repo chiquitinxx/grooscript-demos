@@ -17,11 +17,10 @@ ext {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
-dependencies { //<3>
+dependencies { //<2>
     compile group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-json', version: groovyVersion
     compile group: 'org.codehaus.groovy', name: 'groovy-test', version: groovyVersion
@@ -41,10 +40,9 @@ dependencies { //<3>
 grooscript {
     source = ['src/main/groovy/Execute.groovy',
               'src/main/groovy/nodejs/NodeJs.groovy',
-              'src/main/groovy/colors/JsColors.groovy'
-    ] //<4>
-    destination = 'js' //<5>
-    classpath = ['src/main/groovy'] //<6>
+              'src/main/groovy/colors/JsColors.groovy'] //<3>
+    destination = 'js' //<4>
+    classpath = ['src/main/groovy'] //<5>
     initialText = '//Grooscript converted file'
 }
 // end::conf[]

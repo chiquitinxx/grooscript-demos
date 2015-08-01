@@ -32,11 +32,10 @@ Is a node.js project, but we will use gradle to work with groovy files and conve
 include::{currentDir}/build.gradle[tags=conf]
 --
 <1> Get grooscript gradle plugin from bintray.
-<2> Use it.
-<3> As a normal groovy proyect we will use groovy and some grooscript features.
-<4> Groovy file to be converted to javascript.
-<5> Folder to save js file.
-<6> Classpath to use when compiling groovy file before convert it.
+<2> As a normal groovy proyect we will use groovy and some grooscript features.
+<3> Groovy file to be converted to javascript.
+<4> Folder to save js file.
+<5> Classpath to use when compiling groovy file before convert it.
 
 To convert +Execute.groovy+ to javascript, do +> ./gradlew convert+. There are more task, to explore the
 plugin take a look at link:starting_gradle.html[starting guide].
