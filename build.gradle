@@ -1,28 +1,16 @@
 // tag::conf[]
-buildscript {
-    repositories {
-        jcenter()
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'org.grooscript:grooscript-gradle-plugin:1.2.0-SNAPSHOT'
-    }
-}
-
 plugins {
-    //id "org.grooscript.conversion" version "1.1.2" //<1>
+    id "org.grooscript.conversion" version "1.2.0" //<1>
     id "org.asciidoctor.convert" version "1.5.2"
 }
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
-apply plugin: 'org.grooscript.conversion'
-
 
 ext {
     groovyVersion = '2.4.4'
     gradleCurrentVersion = '2.5'
-    grooscriptVersion = '1.2.0-SNAPSHOT'
+    grooscriptVersion = '1.2.0'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
@@ -56,14 +44,15 @@ grooscript {
               'src/main/groovy/colors/JsColors.groovy'
     ] //<4>
     destination = 'js' //<5>
-    classpath = ['src/main/groovy'] //<7>
+    classpath = ['src/main/groovy'] //<6>
     initialText = '//Grooscript converted file'
 }
 // end::conf[]
 
 task convertReact(type: org.grooscript.gradle.ConvertTask) {
-    source = ['src/main/groovy/react.groovy', 'src/main/groovy/react/TodoApp.groovy']
+    source = ['src/main/groovy/react.groovy']
     destination = 'src/main/webapp/js'
+    includeDependencies = true
 }
 
 task convertPaint(type: org.grooscript.gradle.ConvertTask) {

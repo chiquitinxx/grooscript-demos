@@ -36,8 +36,7 @@ include::{currentDir}/build.gradle[tags=conf]
 <3> As a normal groovy proyect we will use groovy and some grooscript features.
 <4> Groovy file to be converted to javascript.
 <5> Folder to save js file.
-<6> Put in destination js files all dependencies needed.
-<7> Classpath to use when compiling groovy file before convert it.
+<6> Classpath to use when compiling groovy file before convert it.
 
 To convert +Execute.groovy+ to javascript, do +> ./gradlew convert+. There are more task, to explore the
 plugin take a look at link:starting_gradle.html[starting guide].
