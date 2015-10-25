@@ -1,6 +1,6 @@
 //Grooscript converted file
 function TodoApp() {
-  var gSobject = gs.inherit(gs.baseClass,'TodoApp');
+  var gSobject = gs.init('TodoApp');
   gSobject.clazz = { name: 'react.TodoApp', simpleName: 'TodoApp'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.todos = null;

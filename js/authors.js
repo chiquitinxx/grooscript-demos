@@ -1,6 +1,6 @@
 var gs = require('grooscript');
 function Faker() {
-  var gSobject = gs.inherit(gs.baseClass,'Faker');
+  var gSobject = gs.init('Faker');
   gSobject.clazz = { name: 'Faker', simpleName: 'Faker'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject._faker = null;

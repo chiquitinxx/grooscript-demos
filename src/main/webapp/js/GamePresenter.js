@@ -1,6 +1,6 @@
 //Grooscript converted file
 function GamePresenter() {
-  var gSobject = gs.inherit(gs.baseClass,'GamePresenter');
+  var gSobject = gs.init('GamePresenter');
   gSobject.clazz = { name: 'game.GamePresenter', simpleName: 'GamePresenter'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.game = null;

@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Three() {
-  var gSobject = gs.inherit(gs.baseClass,'Three');
+  var gSobject = gs.init('Three');
   gSobject.clazz = { name: 'three.Three', simpleName: 'Three'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.scene = null;

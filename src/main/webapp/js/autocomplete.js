@@ -1,6 +1,6 @@
 //Grooscript converted file
 function ReactiveResolver() {
-  var gSobject = gs.inherit(gs.baseClass,'ReactiveResolver');
+  var gSobject = gs.init('ReactiveResolver');
   gSobject.clazz = { name: 'rxjs.ReactiveResolver', simpleName: 'ReactiveResolver'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.reactive = function(x0) { return ReactiveResolver.reactive(x0); }

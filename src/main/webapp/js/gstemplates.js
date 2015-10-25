@@ -1,5 +1,5 @@
 function Templates() {
-  var gSobject = gs.inherit(gs.baseClass,'Templates');
+  var gSobject = gs.init('Templates');
   gSobject.clazz = { name: 'org.grooscript.gradle.template.Templates', simpleName: 'Templates'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   Object.defineProperty(gSobject, 'templates', { get: function() { return Templates.templates; }, set: function(gSval) { Templates.templates = gSval; }, enumerable: true });

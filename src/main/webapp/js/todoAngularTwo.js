@@ -1,6 +1,6 @@
 //Grooscript converted file
 function TodoController() {
-  var gSobject = gs.inherit(gs.baseClass,'TodoController');
+  var gSobject = gs.init('TodoController');
   gSobject.clazz = { name: 'angular.TodoController', simpleName: 'TodoController'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.clazz.interfaces = [{ name: 'angular.AngularController', simpleName: 'AngularController'}];

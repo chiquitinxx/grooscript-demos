@@ -1,6 +1,6 @@
 //Grooscript converted file
 function CountriesPresenter() {
-  var gSobject = gs.inherit(gs.baseClass,'CountriesPresenter');
+  var gSobject = gs.init('CountriesPresenter');
   gSobject.clazz = { name: 'countries.CountriesPresenter', simpleName: 'CountriesPresenter'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.countries = null;

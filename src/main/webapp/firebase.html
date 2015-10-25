@@ -9,4 +9,43 @@
 </head>
 <body>
     <script type="text/javascript" src="js/firebaseAction.js"></script>
+    <button onclick="run()">Hola</button>
+<script>
+    function Container() {
+        var gSobject = gs.inherit(new gs.BaseClass(),'Container');
+        gSobject.clazz = { name: 'Container', simpleName: 'Container'};
+        gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
+        gSobject.pieces = gs.list([]);
+        gSobject['sum'] = function(it) {
+            return gs.mc(gSobject.pieces,"sum",[function(it) {
+                return gs.gp(it,"value");
+            }]);
+        }
+        gSobject['Container0'] = function(it) {
+            var number = gs.plus(gs.mc(gs.random(),"nextInt",[20]), 20);
+            gs.mc(number,"times",[function(it) {
+                var piece = gs.map().add("name","name" + (it) + "").add("value",it);
+                return gs.mc(gSobject.pieces,'leftShift', gs.list([piece]));
+            }]);
+            return this;
+        }
+        if (arguments.length==0) {gSobject.Container0(); }
+        if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
+
+        return gSobject;
+    };
+    function run() {
+        var takeTime = function (closure) {
+            var init = gs.date();
+            gs.execCall(closure, this, []);
+            return gs.minus(gs.gp(gs.date(), "time"), gs.gp(init, "time"));
+        };
+        gs.println(gs.plus("Sum containers time: ", gs.execCall(takeTime, this, [function (it) {
+            return (50000).times(function (it) {
+                var container = Container();
+                return gs.mc(container, "sum", []);
+            });
+        }])));
+    };
+</script>
 </body>

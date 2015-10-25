@@ -1,6 +1,6 @@
 //Grooscript converted file
 function NodeJs() {
-  var gSobject = gs.inherit(gs.baseClass,'NodeJs');
+  var gSobject = gs.init('NodeJs');
   gSobject.clazz = { name: 'nodejs.NodeJs', simpleName: 'NodeJs'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.clazz.interfaces = [{ name: 'colors.JsColors', simpleName: 'JsColors'}];
@@ -12,9 +12,9 @@ function NodeJs() {
   }
   gSobject.red = function(x1) { return JsColors.red(gSobject,x1); }
   gSobject.bold = function(x1) { return JsColors.bold(gSobject,x1); }
+  gSobject.rainbow = function(x1) { return JsColors.rainbow(gSobject,x1); }
   JsColors.$init$(gSobject);
   gSobject.grey = function(x1) { return JsColors.grey(gSobject,x1); }
-  gSobject.rainbow = function(x1) { return JsColors.rainbow(gSobject,x1); }
   gSobject.module = function(name) {
     try {
             global[name] = require(name);

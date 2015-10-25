@@ -1,6 +1,6 @@
 //Grooscript converted file
 function GoogleMap() {
-  var gSobject = gs.inherit(gs.baseClass,'GoogleMap');
+  var gSobject = gs.init('GoogleMap');
   gSobject.clazz = { name: 'maps.GoogleMap', simpleName: 'GoogleMap'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.options = gs.map().add("zoom",8);

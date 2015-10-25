@@ -1,6 +1,6 @@
 //Grooscript converted file
 function ReactiveScript() {
-  var gSobject = gs.inherit(gs.baseClass,'ReactiveScript');
+  var gSobject = gs.init('ReactiveScript');
   gSobject.clazz = { name: 'rxjs.ReactiveScript', simpleName: 'ReactiveScript'};
   gSobject.clazz.superclass = { name: 'groovy.lang.Script', simpleName: 'Script'};
   gSobject.selectors = gs.map();

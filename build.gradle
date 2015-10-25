@@ -1,22 +1,34 @@
 // tag::conf[]
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "org.grooscript:grooscript-gradle-plugin:1.2.2-SNAPSHOT"
+    }
+}
+
 plugins {
-    id "org.grooscript.conversion" version "1.2.0" //<1>
+    //id "org.grooscript.conversion" version "1.2.2-SNAPSHOT" //<1>
     id "org.asciidoctor.convert" version "1.5.2"
 }
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
+apply plugin: "org.grooscript.conversion"
 
 ext {
-    groovyVersion = '2.4.4'
-    gradleCurrentVersion = '2.5'
-    grooscriptVersion = '1.2.0'
+    groovyVersion = '2.4.5'
+    gradleCurrentVersion = '2.8'
+    grooscriptVersion = '1.2.2-SNAPSHOT'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -144,6 +156,12 @@ task convertJQueryRest(type: org.grooscript.gradle.ConvertTask) {
 task convertDualRx(type: org.grooscript.gradle.ConvertTask) {
     source = ['src/main/groovy/dualrx', 'src/main/groovy/observeRx.groovy']
     destination = 'js'
+}
+
+task convertSpeedTest(type: org.grooscript.gradle.ConvertTask) {
+    source = ['speed-test/test.groovy']
+    destination = 'speed-test'
+    initialText = "var gs = require('./grooscript.js');"
 }
 
 task convertAll << {

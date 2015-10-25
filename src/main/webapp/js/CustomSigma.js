@@ -1,6 +1,6 @@
 //Grooscript converted file
 function CustomSigma() {
-  var gSobject = gs.inherit(gs.baseClass,'CustomSigma');
+  var gSobject = gs.init('CustomSigma');
   gSobject.clazz = { name: 'countries.CustomSigma', simpleName: 'CustomSigma'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.s = null;

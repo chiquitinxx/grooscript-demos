@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Stars() {
-  var gSobject = gs.inherit(gs.baseClass,'Stars');
+  var gSobject = gs.init('Stars');
   gSobject.clazz = { name: 'raphael.Stars', simpleName: 'Stars'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   Object.defineProperty(gSobject, 'STARS_NUMBER', { get: function() { return Stars.STARS_NUMBER; }, set: function(gSval) { Stars.STARS_NUMBER = gSval; }, enumerable: true });

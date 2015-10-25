@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Cell() {
-  var gSobject = gs.inherit(gs.baseClass,'Cell');
+  var gSobject = gs.init('Cell');
   gSobject.clazz = { name: 'game.Cell', simpleName: 'Cell'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.value = null;

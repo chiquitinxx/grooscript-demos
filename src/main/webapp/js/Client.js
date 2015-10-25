@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Client() {
-  var gSobject = gs.inherit(gs.baseClass,'Client');
+  var gSobject = gs.init('Client');
   gSobject.clazz = { name: 'chat.Client', simpleName: 'Client'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.login = null;

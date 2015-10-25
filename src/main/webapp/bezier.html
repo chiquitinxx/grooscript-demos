@@ -8,16 +8,25 @@
         canvas { border: 1px solid black; }
     </style>
 </head>
-<body onload="drawInfinite()">
+<body>
     <canvas id="canvas" width="1000" height="800"></canvas>
     <script type="text/javascript">
         var draw = Draw('canvas');
 
+        window.requestAnimFrame = (function(callback) {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                function(callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+        })();
+
         function drawInfinite() {
             draw.random();
-            window.setTimeout(function() {
-                drawInfinite();
-            }, 0);
+            requestAnimationFrame(drawInfinite);
         }
+
+        window.requestAnimFrame(drawInfinite);
     </script>
 </body>

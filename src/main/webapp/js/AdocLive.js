@@ -1,6 +1,6 @@
 //Grooscript converted file
 function AdocLive() {
-  var gSobject = gs.inherit(gs.baseClass,'AdocLive');
+  var gSobject = gs.init('AdocLive');
   gSobject.clazz = { name: 'asciidoctor.AdocLive', simpleName: 'AdocLive'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.adocCode = null;

@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Draw() {
-  var gSobject = gs.inherit(gs.baseClass,'Draw');
+  var gSobject = gs.init('Draw');
   gSobject.clazz = { name: 'paint.Draw', simpleName: 'Draw'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.functions = Functions();

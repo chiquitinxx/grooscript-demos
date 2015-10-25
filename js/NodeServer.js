@@ -1,6 +1,6 @@
 //Grooscript converted file
 function NodeServer() {
-  var gSobject = gs.inherit(gs.baseClass,'NodeServer');
+  var gSobject = gs.init('NodeServer');
   gSobject.clazz = { name: 'chat.NodeServer', simpleName: 'NodeServer'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.expressApp = gs.map().add("get",function(path, closure) {

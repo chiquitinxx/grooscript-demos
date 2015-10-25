@@ -1,6 +1,6 @@
 //Grooscript converted file
 function SnapSvg() {
-  var gSobject = gs.inherit(gs.baseClass,'SnapSvg');
+  var gSobject = gs.init('SnapSvg');
   gSobject.clazz = { name: 'snap.SnapSvg', simpleName: 'SnapSvg'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.snap = null;
@@ -42,7 +42,7 @@ SnapSvg.snapSvg = function(selector, cl) {
 }
 
 function Element() {
-  var gSobject = gs.inherit(gs.baseClass,'Element');
+  var gSobject = gs.init('Element');
   gSobject.clazz = { name: 'snap.Element', simpleName: 'Element'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.setVerticalScale = function(scale) {

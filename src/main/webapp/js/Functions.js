@@ -1,6 +1,6 @@
 //Grooscript converted file
 function Functions() {
-  var gSobject = gs.inherit(gs.baseClass,'Functions');
+  var gSobject = gs.init('Functions');
   gSobject.clazz = { name: 'paint.Functions', simpleName: 'Functions'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject['nBezier'] = function(t, points) {

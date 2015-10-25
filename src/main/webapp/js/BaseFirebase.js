@@ -1,6 +1,6 @@
 //Grooscript converted file
 function BaseFirebase() {
-  var gSobject = gs.inherit(gs.baseClass,'BaseFirebase');
+  var gSobject = gs.init('BaseFirebase');
   gSobject.clazz = { name: 'firebase.BaseFirebase', simpleName: 'BaseFirebase'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.dataRef = null;
