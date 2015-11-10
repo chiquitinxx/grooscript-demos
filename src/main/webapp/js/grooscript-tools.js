@@ -165,17 +165,29 @@ function GQueryImpl() {
     if (closure === undefined) closure = null;
     return gs.mc(gs.execStatic(GQueryList,'of', this,[selector]),"bind",[target, nameProperty, closure]);
   }
-  gSobject['existsId'] = function(id) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,["#" + (id) + ""]),"hasResults",[]);
+  gSobject['bindProperty'] = function(selector, target, nameProperty, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",[selector, parent]),"bind",[target, nameProperty]);
   }
-  gSobject['existsName'] = function(name) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,["[name='" + (name) + "']"]),"hasResults",[]);
+  gSobject['existsSelector'] = function(selector, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",[selector, parent]),"hasResults",[]);
   }
-  gSobject['existsGroup'] = function(name) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,["input:radio[name='" + (name) + "']"]),"hasResults",[]);
+  gSobject['existsId'] = function(id, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",["#" + (id) + "", parent]),"hasResults",[]);
   }
-  gSobject['onEvent'] = function(selector, nameEvent, func) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,[selector]),"onEvent",[nameEvent, func]);
+  gSobject['existsName'] = function(name, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",["[name='" + (name) + "']", parent]),"hasResults",[]);
+  }
+  gSobject['existsGroup'] = function(name, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",["input:radio[name='" + (name) + "']", parent]),"hasResults",[]);
+  }
+  gSobject['onEvent'] = function(selector, nameEvent, func, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",[selector, parent]),"onEvent",[nameEvent, func]);
   }
   gSobject.doRemoteCall = function(url, type, params, onSuccess, onFailure, objectResult) {
     if (objectResult === undefined) objectResult = null;
@@ -198,52 +210,57 @@ function GQueryImpl() {
   gSobject.onReady = function(func) {
     $(document).ready(func);
   }
-  gSobject['attachMethodsToDomEvents'] = function(obj) {
+  gSobject['attachMethodsToDomEvents'] = function(obj, parent) {
+    if (parent === undefined) parent = null;
     return gs.mc(gs.gp((obj = gs.metaClass(obj)),"methods"),"each",[function(method) {
       if (gs.mc(gs.gp(method,"name"),"endsWith",["Click"])) {
         var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 5)]);
-        if (gs.mc(gSobject,"existsId",[shortName])) {
-          gs.mc(gSobject,"onEvent",[gs.plus("#", shortName), "click", obj["" + (gs.gp(method,"name")) + ""]]);
+        if (gs.mc(gSobject,"existsId",[shortName, parent])) {
+          gs.mc(gSobject,"onEvent",[gs.plus("#", shortName), "click", obj["" + (gs.gp(method,"name")) + ""], parent]);
         };
       };
       if (gs.mc(gs.gp(method,"name"),"endsWith",["Submit"])) {
         var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 6)]);
-        if (gs.mc(gSobject,"existsId",[shortName])) {
+        if (gs.mc(gSobject,"existsId",[shortName, parent])) {
           gs.mc(gSobject,"onEvent",[gs.plus("#", shortName), "submit", gs.mc(obj["" + (gs.gp(method,"name")) + ""],'leftShift', gs.list([function(it) {
             return gs.mc(it,"preventDefault",[]);
-          }]))]);
+          }])), parent]);
         };
       };
       if (gs.mc(gs.gp(method,"name"),"endsWith",["Change"])) {
         var shortName = gs.mc(gs.gp(method,"name"),"substring",[0, gs.minus(gs.mc(gs.gp(method,"name"),"length",[]), 6)]);
-        if (gs.mc(gSobject,"existsId",[shortName])) {
-          return gs.mc(gSobject,"onChange",[gs.plus("#", shortName), obj["" + (gs.gp(method,"name")) + ""]]);
+        if (gs.mc(gSobject,"existsId",[shortName, parent])) {
+          return gs.mc(gSobject,"onChange",[gs.plus("#", shortName), obj["" + (gs.gp(method,"name")) + ""], parent]);
         };
       };
     }]);
   }
-  gSobject['onChange'] = function(selector, closure) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,[selector]),"onChange",[closure]);
+  gSobject['onChange'] = function(selector, closure, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",[selector, parent]),"onChange",[closure]);
   }
-  gSobject['focusEnd'] = function(selector) {
-    return gs.mc(gs.execStatic(GQueryList,'of', this,[selector]),"focusEnd",[]);
+  gSobject['focusEnd'] = function(selector, parent) {
+    if (parent === undefined) parent = null;
+    return gs.mc(gs.mc(gSobject,"resolveSelector",[selector, parent]),"focusEnd",[]);
   }
-  gSobject['bindAllProperties'] = function(target) {
+  gSobject['bindAllProperties'] = function(target, parent) {
+    if (parent === undefined) parent = null;
     return gs.mc(gs.gp(target,"properties"),"each",[function(name, value) {
-      if (gs.mc(gSobject,"existsId",[name])) {
-        gs.mc(gSobject,"bind",["#" + (name) + "", target, name]);
+      if (gs.mc(gSobject,"existsId",[name, parent])) {
+        gs.mc(gSobject,"bindProperty",["#" + (name) + "", target, name, parent]);
       };
-      if (gs.mc(gSobject,"existsName",[name])) {
-        gs.mc(gSobject,"bind",["[name='" + (name) + "']", target, name]);
+      if (gs.mc(gSobject,"existsName",[name, parent])) {
+        gs.mc(gSobject,"bindProperty",["[name='" + (name) + "']", target, name, parent]);
       };
-      if (gs.mc(gSobject,"existsGroup",[name])) {
-        return gs.mc(gSobject,"bind",["input:radio[name='" + (name) + "']", target, name]);
+      if (gs.mc(gSobject,"existsGroup",[name, parent])) {
+        return gs.mc(gSobject,"bindProperty",["input:radio[name='" + (name) + "']", target, name, parent]);
       };
     }]);
   }
-  gSobject['bindAll'] = function(target) {
-    gs.mc(gSobject,"bindAllProperties",[target]);
-    return gs.mc(gSobject,"attachMethodsToDomEvents",[target]);
+  gSobject['bindAll'] = function(target, parent) {
+    if (parent === undefined) parent = null;
+    gs.mc(gSobject,"bindAllProperties",[target, parent]);
+    return gs.mc(gSobject,"attachMethodsToDomEvents",[target, parent]);
   }
   gSobject['observeEvent'] = function(selector, nameEvent, data) {
     if (data === undefined) data = gs.map();
@@ -256,6 +273,9 @@ function GQueryImpl() {
   gSobject['call'] = function(selector) {
     return gs.execStatic(GQueryList,'of', this,[selector]);
   }
+  gSobject['resolveSelector'] = function(selector, parent) {
+    return gs.execStatic(GQueryList,'of', this,[(parent != null ? gs.mc(parent,"find",[selector]) : selector)]);
+  }
   if (arguments.length == 1) {gs.passMapToObject(arguments[0],gSobject);};
   
   return gSobject;
@@ -266,7 +286,6 @@ function GQueryList() {
   gSobject.clazz = { name: 'org.grooscript.jquery.GQueryList', simpleName: 'GQueryList'};
   gSobject.clazz.superclass = { name: 'java.lang.Object', simpleName: 'Object'};
   gSobject.list = null;
-  gSobject.selec = null;
   gSobject.of = function(x0) { return GQueryList.of(x0); }
   gSobject.methodMissing = function(name, args) {
     return gSobject.list[name].apply(gSobject.list, args);
@@ -308,7 +327,8 @@ function GQueryList() {
                 cl($(this).val());
             });
         } else {
-            console.log('Not supporting onChange for selector: ' + gSobject.selec);
+            console.log('Not supporting onChange for jquery element');
+            console.log(jq);
         }
         return gSobject;
   }
@@ -368,7 +388,9 @@ function GQueryList() {
         } else if (jq.is(":radio")) {
             target[nameSetMethod] = function(newValue) {
                 this[nameProperty] = newValue;
-                $(gSobject.selec +'[value="' + newValue + '"]').prop('checked', true);
+                jq.each(function(idx, elem) {
+                    if (elem.value == newValue) { $(elem).prop('checked', true) }
+                });
                 if (closure) { closure(newValue); };
             };
             jq.change(function() {
@@ -388,23 +410,23 @@ function GQueryList() {
                 if (closure) { closure(currentVal); };
             });
         } else {
-            console.log('Not supporting bind for selector ' + gSobject.selec);
+            console.log('Not supporting bind for jquery element');
+            console.log(jq);
         }
         return gSobject;
   }
   gSobject.jqueryList = function(selec) {
     return $(selec);
   }
-  gSobject['GQueryList1'] = function(selector) {
-    gSobject.selec = selector;
-    gSobject.list = gs.mc(gSobject,"jqueryList",[selector]);
+  gSobject['GQueryList1'] = function(selecOrJq) {
+    gSobject.list = (gs.instanceOf(selecOrJq, "String") ? gs.mc(gSobject,"jqueryList",[selecOrJq]) : selecOrJq);
     return this;
   }
   if (arguments.length==1) {gSobject.GQueryList1(arguments[0]); }
   
   return gSobject;
 };
-GQueryList.of = function(selector) {
-  return GQueryList(selector);
+GQueryList.of = function(selecOrJq) {
+  return GQueryList(selecOrJq);
 }
 
