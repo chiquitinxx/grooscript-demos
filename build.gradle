@@ -1,16 +1,14 @@
 // tag::conf[]
 buildscript {
     repositories {
-        mavenCentral()
-        mavenLocal()
+        jcenter()
     }
     dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:1.2.2-SNAPSHOT"
+        classpath "org.grooscript:grooscript-gradle-plugin:1.2.2"
     }
 }
 
 plugins {
-    //id "org.grooscript.conversion" version "1.2.2-SNAPSHOT" //<1>
     id "org.asciidoctor.convert" version "1.5.2"
 }
 
@@ -21,7 +19,7 @@ apply plugin: "org.grooscript.conversion"
 ext {
     groovyVersion = '2.4.5'
     gradleCurrentVersion = '2.8'
-    grooscriptVersion = '1.2.2-SNAPSHOT'
+    grooscriptVersion = '1.2.2'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
