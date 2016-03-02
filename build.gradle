@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "org.grooscript:grooscript-gradle-plugin:1.2.2"
+        classpath "org.grooscript:grooscript-gradle-plugin:1.2.3"
     }
 }
 
@@ -17,16 +17,16 @@ apply plugin: 'groovy'
 apply plugin: "org.grooscript.conversion"
 
 ext {
-    groovyVersion = '2.4.5'
-    gradleCurrentVersion = '2.8'
-    grooscriptVersion = '1.2.2'
+    groovyVersion = '2.4.6'
+    gradleCurrentVersion = '2.11'
+    grooscriptVersion = '1.2.3'
     imagesDir = 'img'
     docImagesDir = 'img'
     jsDir = 'js'
 }
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
 }
 

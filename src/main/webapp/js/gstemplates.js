@@ -11,8 +11,12 @@ function Templates() {
 Templates.applyTemplate = function(name, model) {
   if (model === undefined) model = gs.map();
   var cl = Templates.templates[name];
-  gs.sp(cl,"delegate",model);
-  return gs.execCall(cl, this, [model]);
+  if (!gs.bool(cl)) {
+    return gs.plus((gs.plus("<p>Not found template: ", name)), "</p>");
+  } else {
+    gs.sp(cl,"delegate",model);
+    return gs.execCall(cl, this, [model]);
+  };
 }
 Templates.templates = gs.map().add("join.gtpl",function(model) {
   if (model === undefined) model = gs.map();

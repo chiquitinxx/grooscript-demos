@@ -12,9 +12,9 @@ function NodeJs() {
   }
   gSobject.red = function(x1) { return JsColors.red(gSobject,x1); }
   gSobject.bold = function(x1) { return JsColors.bold(gSobject,x1); }
+  JsColors.$init$(gSobject);
   gSobject.rainbow = function(x1) { return JsColors.rainbow(gSobject,x1); }
   gSobject.grey = function(x1) { return JsColors.grey(gSobject,x1); }
-  JsColors.$init$(gSobject);
   gSobject.module = function(name) {
     try {
             global[name] = require(name);
@@ -34,7 +34,7 @@ function NodeJs() {
     }], gSobject);
   }
   gSobject['parallel'] = function(closures) {
-    return gs.mc(gs.fs('async', this),"parallel",[closures]);
+    return gs.mc(gs.fs('async', this, gSobject),"parallel",[closures]);
   }
   gSobject.nodejs = function(x0) { return NodeJs.nodejs(x0); }
   gSobject['NodeJs0'] = function(it) {

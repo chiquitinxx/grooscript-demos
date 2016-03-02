@@ -11,7 +11,7 @@ function GamePresenter() {
     return gs.mc(gSobject,"drawGame",[]);
   }
   gSobject['drawGame'] = function(it) {
-    return gs.mc(gs.mc(this,"$",["#gameTable"], gSobject),"html",[gs.fs('htmlFromGame', this)]);
+    return gs.mc(gs.mc(this,"$",["#gameTable"], gSobject),"html",[gs.fs('htmlFromGame', this, gSobject)]);
   }
   gSobject['getHtmlFromGame'] = function(it) {
     return gs.execStatic(HtmlBuilder,'build', this,[function(it) {
