@@ -1,22 +1,22 @@
 Grooscript demos
 ================
 
-### Groovy code converted to javascript with [grooscript](http://grooscript.org)
+### Groovy code converted to javascript with [grooscript](https://www.grooscript.org)
 
-## Using Node.js with colors, request and async npm's [guide](http://grooscript.org/nodejs_example.html)
+## Using Node.js with colors, request and async npm's [guide](https://www.grooscript.org/nodejs_example.html)
 
 [Dsl](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/Execute.groovy)
 
 ![Node modules](img/node.png)
 
-## Jackson Pollock painting demo, see in [action](http://grooscript.org/demo/bezier.html)
+## Jackson Pollock painting demo, see in [action](https://www.grooscript.org/demo/bezier.html)
 
 [Draw](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/paint/Draw.groovy)
 [Functions](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/paint/Functions.groovy)
 
 ![Painting App](img/paint.png)
 
-## Creating components like [react.js](http://facebook.github.io/react/) but in Groovy [guide](http://grooscript.org/react_example.html)
+## Creating components like [react.js](http://facebook.github.io/react/) but in Groovy [guide](https://www.grooscript.org/react_example.html)
 
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/react)
 [In action](http://grooscript.org/demo/react.html)
@@ -27,15 +27,15 @@ Grooscript demos
 
 [Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/asciidoctor/AdocLive.groovy)
 
-### [Try it!](http://grooscript.org/demo/asciidoctor.html)
+### [Try it!](https://www.grooscript.org/demo/asciidoctor.html)
 
-## 2048 game, [play!](http://grooscript.org/demo/game.html)
+## 2048 game, [play!](https://www.grooscript.org/demo/game.html)
 
 [Sources](https://github.com/chiquitinxx/grooscript-demos/tree/master/src/main/groovy/game)
 
 ![Game](img/game.png)
 
-## Interactive graphic search, see in [action](http://grooscript.org/demo/sigma.html)
+## Interactive graphic search, see in [action](https://www.grooscript.org/demo/sigma.html)
 
 [Source](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/countries)
 
@@ -48,15 +48,15 @@ Grooscript demos
 
 ![Chat](img/newchat.png)
 
-## Svg clock, see in [action](http://grooscript.org/demo/snapsvg.html)
+## Svg clock, see in [action](https://www.grooscript.org/demo/snapsvg.html)
 
 ![Chat](img/snapsvg.png)
 
-## See all stars moving [here](http://grooscript.org/demo/stars.html)
+## See all stars moving [here](https://www.grooscript.org/demo/stars.html)
 
 ![Stars](img/stars.png)
 
-## Three.js objects [here](http://grooscript.org/demo/three.html)
+## Three.js objects [here](https://www.grooscript.org/demo/three.html)
 
 [Source code](https://github.com/chiquitinxx/grooscript-demos/blob/master/src/main/groovy/three)
 
